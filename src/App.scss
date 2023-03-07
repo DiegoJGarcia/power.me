@@ -1,0 +1,61 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  
+  max-height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+
+  background: var(--background_first);
+  
+  &_title {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    
+    background: var(--background_second);
+    
+    width: stretch;
+    padding: 20px 40px;
+    color: var(--text_color);
+    
+  }
+  
+  &_list {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 60px;
+    flex-wrap: wrap;
+
+    width: stretch;
+    height: 100%;
+
+    padding: 40px;
+
+    overflow: hidden auto;
+    
+    &_item {
+      width: 100vw;
+    }
+
+    &_add {
+      position: absolute;
+      bottom: 5vh;
+    } 
+  }
+
+  &_action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    font-size: smaller;
+    
+    padding: 20px;
+  }
+}

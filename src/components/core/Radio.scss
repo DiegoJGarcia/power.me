@@ -1,0 +1,30 @@
+@import "assets/vars";
+
+.radio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 20px;
+
+  border: var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: 7px 22px;
+
+  width: fit-content;
+  min-width: 144px;
+  height: 37px;
+
+  transition: .4s;
+
+  overflow: hidden;
+
+  background: var(--background_first);
+  color: var(--text_color);
+  
+  &:hover {
+    border: var(--border);
+    transform: scale(1.05);
+  }
+}

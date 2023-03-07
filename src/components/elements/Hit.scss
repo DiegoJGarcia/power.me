@@ -1,0 +1,24 @@
+.hit {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+
+	cursor: pointer;
+
+	margin: 20px;
+
+	width: 100px;
+	height: 100px;
+
+	border-radius: var(--radius);
+  transition: var(--transition);
+  background: var(--background_third);
+
+  transition: var(--transition);
+
+  &:hover {
+    transform: scale(1.01);
+    border: var(--border);
+  }
+}

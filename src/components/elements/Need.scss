@@ -1,0 +1,21 @@
+.need {
+	display: flex;
+	align-items: flex-start;
+	
+	gap: 20px;
+
+  color: var(--text_color);
+  border: var(--border);
+
+	padding: 20px;
+
+	&_body {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		gap: 10px;
+
+		// height: 74px;
+		width: stretch;
+	}
+}

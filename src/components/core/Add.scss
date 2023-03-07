@@ -1,0 +1,33 @@
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  padding: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  
+  transition: var(--transition);
+  
+  margin: 40px;
+  
+  background: var(--first);
+  
+  border: none;
+
+  &:disabled {
+    background: grey;
+    &:hover {
+      transform: none;
+      cursor: auto;
+      box-shadow: none;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.07);
+    border: var(--border);
+  }
+}

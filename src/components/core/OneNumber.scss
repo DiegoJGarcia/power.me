@@ -1,0 +1,34 @@
+@import "assets/vars";
+
+.number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: 1s;
+
+  &--extra {
+    margin-top: 4px;
+    min-width: fit-content;
+  }
+
+  &_input {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 9px;
+    width: fit-content;
+
+    transition: 1s;
+
+  }
+  
+  &_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}

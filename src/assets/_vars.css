@@ -1,0 +1,85 @@
+:root {
+  box-sizing: border-box;
+  /* COLORS */
+
+  --first: #3482E7;
+  --second: #e7b134;
+  --third: #f65164;
+  --default: #212329;
+  
+  --ok: #74cb52;
+  --warning: #cec655;
+  --error: #c56459;
+  
+  --text_color: #131313;
+  --second_text_color: #686868;
+  
+  --hover: #f4f4f442;
+  
+  --one: #212329;
+  --two: #313237;
+  --three: #1A1B1F;
+  
+  --background_first: #212329;
+  --background_second: #313237;
+  --background_third: #1A1B1F;
+  
+  /* COMMONS */
+  
+  --shadow: 7px 4px 10px #747474bb;
+  --shadow-up: 4px 12px 20px #1111112e;
+  --inside-shadow: 0px 0px 70px inset #1d1b1bbb;
+  --border: 1px solid #d1cece;
+  --radius: 24px;
+  --padding: 40px;
+  --gap: 5px;
+  --transition: .4s;
+
+}
+
+.light {
+
+  --default: #d3d5dc;
+  
+  --text_color: #131313;
+  --second_text_color: #fffefedb;
+  
+  --hover: #e3e5e928;
+  --border: 1px solid #676666;
+  
+  --background_first: #bcbfc5;
+  --background_second: #b3b6ba;
+  --background_third: #7e8083;
+  
+}
+
+.dark {
+
+  --default: #212329;
+  
+  --text_color: #f8f8f8;
+  --second_text_color: #323030db;
+  
+  --hover: #3030303c;
+  --border: 1px solid #e1e1e1;
+  
+  --background_first: #212329;
+  --background_second: #313237;
+  --background_third: #1A1B1F;
+
+}
+
+/* 
+YOU CAN ADD THE THEME YOU WANT HERE.. I AM WORKING ON THE HOOK TO CHOOSE IT
+*/
+
+.tridi {
+  
+  --transform: scale(1.04) perspective(1700px) rotateX(4deg);;
+  --box_shadow: -2px 17px 22px #0c0c0c7e;
+  
+  --text_shadow: -2px 7px 9px #0c0c0c9a;;
+  --transform_text: scale(1.02);
+
+} 
+
