@@ -3,20 +3,16 @@
   justify-content: center;
   align-items: center;
 
-  width: 40px;
-  height: 40px;
-  padding: 20px;
-  border-radius: 50%;
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 12px;
   cursor: pointer;
   
   transition: var(--transition);
-  
-  margin: 40px;
-  
   background: var(--first);
-  
+  opacity: 25%;
   border: none;
-
+  
   &:disabled {
     background: grey;
     &:hover {
@@ -25,9 +21,9 @@
       box-shadow: none;
     }
   }
-
+  
   &:hover {
-    transform: scale(1.07);
     border: var(--border);
+    opacity: 100%;
   }
 }

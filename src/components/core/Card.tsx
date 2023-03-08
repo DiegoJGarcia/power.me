@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useRef } from 'react';
 import './Card.scss';
 
 import remove from 'assets/error.svg';
@@ -56,6 +56,7 @@ const Card: FC<CardProps> = ({
 				onClickEnd && onClickEnd();
 			}}
 			key={id}
+			onKeyDown={e => e.key === 'Enter' && enter()}
 		>
 			{!noRemove && (
 				<img

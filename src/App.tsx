@@ -13,13 +13,21 @@ import { Stats } from 'components/elements/Stats';
 
 const App = (): ReactElement => {
 	const [light, switchLight] = useTheme();
+	const [emptyOne, setEmptyOne] = useState<boolean>(true);
 
 	const { powers, addPower, updatePower, removePower } = usePower();
 
-	// const addNewOne = (newCompletedPower: IPower) => {
-	// 	addPower(newCompletedPower);
-	// 	setEmptyOne(true);
-	// };
+	const emptyPower: IPower = {
+		id: '',
+		name: '',
+		needs: [],
+		level: 0,
+	};
+
+	const addNewOne = (newCompletedPower: IPower) => {
+		addPower(newCompletedPower);
+		setEmptyOne(true);
+	};
 
 	return (
 		<div className={`app ${light ? 'light' : 'dark'}`}>
@@ -32,10 +40,29 @@ const App = (): ReactElement => {
 			</div>
 			<div className="app_list">
 				{powers.map((power: IPower, index: number) => (
-					<Power key={index} name={power.name} needs={power.needs} />
+					<Power
+						key={index}
+						index={index}
+						data={power}
+						save={(power: IPower) => updatePower(power)}
+						remove={(power: IPower) => removePower(power.name)}
+					/>
 				))}
-				<Stats />
+
+				{emptyOne ? (
+					<Add label="Add Power" onClick={() => setEmptyOne(false)} />
+				) : (
+					<Power
+						adding
+						key="new-empty-power"
+						index={powers.length + 1}
+						data={emptyPower}
+						save={(power: IPower) => addNewOne(power)}
+						remove={() => setEmptyOne(true)}
+					/>
+				)}
 			</div>
+			<Stats />
 			<div className="app_action codes">
 				<h2>POWEERME</h2>
 				<p>by DECREIER 2022</p>

@@ -11,7 +11,7 @@ type OneTextProps = {
 	readOnly?: boolean;
 	onBlur?: () => void;
 	onClick?: () => void;
-	onChange?: (name: string, value: string) => void;
+	onChange?: (value: string, name: string) => void;
 	max?: number;
 	className?: string;
 	align?: string;
@@ -48,7 +48,7 @@ const OneText: FC<OneTextProps> = ({
 	const innerChange = (e: Record<string, any>) => {
 		const newValue = String(e.target.value);
 		setText(newValue);
-		onChange && onChange(name, newValue);
+		onChange && onChange(newValue, name);
 	};
 
 	return (
@@ -61,6 +61,7 @@ const OneText: FC<OneTextProps> = ({
 			<div className="text_input">
 				{(showFix || (value && prefix)) && <div className="ref text--extra">{prefix}</div>}
 				<input
+					autoFocus
 					inputMode={inputmode}
 					ref={textRef}
 					name={name}
@@ -70,7 +71,7 @@ const OneText: FC<OneTextProps> = ({
 						`${className ? ` ${className}` : ''}` +
 						`${align ? ` text_area--${align}` : ''}`
 					}
-					onKeyPress={e => e.key === 'Enter' && textRef.current.blur()}
+					onKeyDown={e => e.key === 'Enter' && textRef.current.blur()}
 					placeholder={placeholder || name}
 					onChange={innerChange}
 					spellCheck={false}

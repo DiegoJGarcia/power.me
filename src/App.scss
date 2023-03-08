@@ -34,17 +34,14 @@
     width: stretch;
     height: 100%;
 
-    padding: 40px;
+    padding: 45px 45px 120px 45px;
 
     overflow: hidden auto;
-    
-    &_item {
-      width: 100vw;
-    }
 
     &_add {
-      position: absolute;
-      bottom: 5vh;
+      position: fixed;
+      left: 48%;
+      bottom: 160px;
     } 
   }
 

@@ -13,6 +13,7 @@ interface PowerResponse {
 const usePower = (): PowerResponse => {
 	const [powers, setPowers] = useState<IPower[]>([
 		{
+			id: 'test-1',
 			name: 'Test Pow',
 			needs: [
 				{ name: 'Programar un componente en React', time: '5min', loops: '4', loopsCount: 2 },
@@ -24,13 +25,14 @@ const usePower = (): PowerResponse => {
 				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
 				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
 			],
+			level: 0,
 		},
 	]);
 
 	useEffect(() => {
-		const cachedPowers: IPower[] | any = cache.get('powers');
+		const cachedPowers: IPower[] | unknown = cache.get('powers');
 
-		!!cachedPowers && setPowers(cachedPowers);
+		!!cachedPowers && setPowers(cachedPowers as IPower[]);
 		!!cachedPowers && console.log('CACHED DATA RESTORED');
 
 		return;

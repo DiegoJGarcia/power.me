@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
 
-  height: fit-content;
+  height: stretch;
   width: 100%;
   max-width: 1200px;
 
@@ -29,6 +29,16 @@
     width: 100%;
     height: 100%;
     padding: 2em 5em 5em 5em;
+
+  }
+
+  &--adding {
+    padding: 20px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 12px;
+    user-select: none;
+    cursor: pointer;
 
   }
 }

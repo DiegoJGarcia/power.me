@@ -5,4 +5,5 @@ export interface IPower {
 	id?: commonId;
 	name: string;
 	needs?: INeed[];
+	level?: number;
 }

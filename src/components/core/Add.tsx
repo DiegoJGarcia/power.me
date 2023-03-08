@@ -4,19 +4,20 @@ import './Add.scss';
 import add from 'assets/add.svg';
 
 type AddProps = {
+	label?: string;
 	onClick: () => void;
 	disabled?: boolean;
 	className?: string;
 };
 
-const Add: FC<AddProps> = ({ onClick, disabled, className }) => {
+const Add: FC<AddProps> = ({ label, onClick, disabled, className }) => {
 	return (
 		<button
-			className={`add ${className ? ` ${className}` : ''}`}
+			className={`add codes ${className ? ` ${className}` : ''}`}
 			onClick={onClick}
 			disabled={disabled}
 		>
-			<img src={add} alt="add-button" />
+			{label || <img src={add} alt="add-button" />}
 		</button>
 	);
 };
