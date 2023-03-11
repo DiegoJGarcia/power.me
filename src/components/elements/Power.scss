@@ -1,10 +1,12 @@
 .power {
+  flex: 1 2 400px;
   display: flex;
   flex-direction: column;
 
   height: stretch;
-  width: 100%;
-  max-width: 1200px;
+  width: stretch;
+  min-width: 400px;
+  max-width: 100%;
 
   background: var(--background_second);
   border-radius: 12px;
@@ -30,6 +32,12 @@
     height: 100%;
     padding: 2em 5em 5em 5em;
 
+  }
+
+  &_add {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
   }
 
   &--adding {

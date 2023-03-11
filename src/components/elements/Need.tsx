@@ -48,13 +48,7 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data, labelStat
 			onSave={!adding ? save : () => saveNeed && saveNeed(need)}
 			onRemove={() => removeNeed && removeNeed(need)}
 		>
-			<StatusIcon
-				name={data?.name}
-				experience={data?.loopsCount}
-				noLabel
-				onClick={() => console.log('clicked')}
-			/>
-			<div className="need_body">
+			<StatusIcon name={data?.name} experience={1} noLabel onClick={() => console.log('clicked')}>
 				<OneText
 					firstFocus
 					className="normal"
@@ -65,8 +59,10 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data, labelStat
 					max={22}
 					align="left"
 				/>
+			</StatusIcon>
+			{/* <div className="need_body">
 				<div className="ref">{labelStatus || 'noob'}</div>
-			</div>
+			</div> */}
 		</Card>
 	);
 };

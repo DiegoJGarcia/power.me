@@ -10,7 +10,6 @@ import { handleLevelLabel } from 'common/helpers';
 import useComplete from 'hooks/core/useComplete';
 import { CardStatus } from 'common/constants';
 import OneText from 'components/core/OneText';
-import { OneNumber } from 'components/core/OneNumber';
 import Add from 'components/core/Add';
 
 type PowerProps = {
@@ -90,7 +89,7 @@ const Power: FC<PowerProps> = ({ index, data, save, remove, adding = false, key 
 							<Need key={index} data={need} />
 						))}
 						{emptyOne ? (
-							<Add label="Add Need" onClick={() => setEmptyOne(false)} />
+							<Add className="power_add" onClick={() => setEmptyOne(false)} />
 						) : (
 							<Need key="new-empty-need" data={emptyNeed} />
 						)}

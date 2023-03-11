@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import './StatusIcon.scss';
 
 enum Status {
@@ -35,6 +35,7 @@ type StatusIconProps = {
 	onClick?: (exp: number) => void;
 	noLabel?: boolean;
 	noIcon?: boolean;
+	children?: ReactElement | ReactElement[] | string | number;
 };
 
 const StatusIcon: FC<StatusIconProps> = ({
@@ -44,6 +45,7 @@ const StatusIcon: FC<StatusIconProps> = ({
 	onClick,
 	noLabel,
 	noIcon,
+	children,
 }) => {
 	const [labelStatus, setLabelStatus] = useState<string>('');
 
@@ -79,7 +81,7 @@ const StatusIcon: FC<StatusIconProps> = ({
 						<img onClick={clicked} className="status_icon_body_img" src={img} alt={name} />
 					) : (
 						<div onClick={clicked} className="status_icon_body_img">
-							{name}
+							{children || name}
 						</div>
 					)}
 				</div>

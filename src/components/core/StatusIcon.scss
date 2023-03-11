@@ -29,8 +29,9 @@
     justify-content: center;
     align-items: center;
     
-    width: 70px;
+    width: fit-content;
     height: 70px;
+    min-width: 70px;
     border-radius: 9px 34px 34px 34px;
     
     font-size: smaller;
@@ -72,9 +73,11 @@
       padding: 2px;
       color: whitesmoke;
       
-      border-radius: 50%;
+      border-radius: 25px;
       height: 44px;
-      width: 44px;
+      margin: 10px;
+      padding: 10px;
+      // width: 44px;
       
       z-index: 3;
       box-shadow: 0 0 10px #1f1e1e88;

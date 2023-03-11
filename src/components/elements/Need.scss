@@ -5,9 +5,14 @@
 	gap: 20px;
 
   color: var(--text_color);
-  border: var(--border);
+	
+	padding: 40px 20px 20px 20px ;
+	border-radius: 25px;
 
-	padding: 20px;
+	&:hover {
+		border: var(--border);
+
+	}
 
 	&_body {
 		display: flex;

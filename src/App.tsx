@@ -4,12 +4,11 @@ import './App.scss';
 import useTheme from 'hooks/core/useTheme';
 import usePower from 'hooks/usePower';
 
-import Add from 'components/core/Add';
-
 import Power from 'components/elements/Power';
 import Themer from 'components/core/Themer';
 import { IPower } from 'domain/models/power';
 import { Stats } from 'components/elements/Stats';
+import Button from 'components/core/Button';
 
 const App = (): ReactElement => {
 	const [light, switchLight] = useTheme();
@@ -50,7 +49,9 @@ const App = (): ReactElement => {
 				))}
 
 				{emptyOne ? (
-					<Add label="Add Power" onClick={() => setEmptyOne(false)} />
+					<Button type="secondary" className="app_list_add" onClick={() => setEmptyOne(false)}>
+						Add Power
+					</Button>
 				) : (
 					<Power
 						adding
@@ -62,7 +63,8 @@ const App = (): ReactElement => {
 					/>
 				)}
 			</div>
-			<Stats />
+			{/* [TODO] FOCUS ON REAL TIME STATUS */}
+			{/* <Stats /> */}
 			<div className="app_action codes">
 				<h2>POWEERME</h2>
 				<p>by DECREIER 2022</p>
