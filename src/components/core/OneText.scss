@@ -10,7 +10,6 @@
 
   z-index: 4;
   transition: 1s;
-  width: fit-content;
 
   &--extra {
     margin-top: 4px;
@@ -88,7 +87,6 @@
     &:focus {
       background: linear-gradient(to bottom right, #396d86b9, #396d86);
       transition: .4s;
-      box-shadow: 0 0 10px #15151548;
       transform: scale(1.02);
     }
 

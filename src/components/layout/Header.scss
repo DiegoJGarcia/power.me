@@ -1,0 +1,46 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+	
+	position: relative;
+	width: stretch;
+	max-height: 120px;
+	padding: 24px;
+
+	z-index: 7;
+
+	background: var(--background_third);
+	
+	margin-bottom: 42px;
+	
+	&_title {
+		color: whitesmoke;
+		min-width: 300px;
+	}
+
+	&_status {
+		display: grid;
+		place-content: center;
+		
+		margin: 10px;
+		position: fixed;
+		top: 32px;
+		right: 48px;
+		bottom: -42px;
+
+		width: 120px;
+		height: 120px;
+
+		border-radius: 50%;
+
+		background-color: rgb(139, 108, 168);
+
+		border: 2px solid whitesmoke;
+
+	}
+	
+}
+

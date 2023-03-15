@@ -35,6 +35,15 @@ export enum PowerLevels {
 	god = 'God',
 }
 
+export enum NeedStatus {
+	interested = 'interesado',
+	starting = 'iniciando',
+	known = 'probado',
+	halfway = 'perfeccionando',
+	dominated = 'dominado',
+	expert = 'experto',
+}
+
 // [TODO] add layouts support
 // export enum Layouts {
 // 	simple = 'simple',
@@ -45,8 +54,8 @@ export enum PowerLevels {
 // }
 
 export enum paths {
-	profile = '/',
-	authentication = '/helping',
+	dash = '/',
+	power = '/:power',
 }
 
 export const regex = {

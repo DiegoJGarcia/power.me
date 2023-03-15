@@ -11,26 +11,17 @@ interface PowerResponse {
 }
 
 const usePower = (): PowerResponse => {
-	const [powers, setPowers] = useState<IPower[]>([
-		{
-			id: 'test-1',
-			name: 'Test Pow',
-			needs: [
-				{ name: 'Programar un componente en React', time: '5min', loops: '4', loopsCount: 2 },
-				{ name: 'Aprender Redux', time: '30min', loops: '3', loopsCount: 0 },
-				{ name: 'Practicar algoritmos', time: '1h', loops: '5', loopsCount: 1 },
-				{ name: 'Practicar asd', time: '1h', loops: '4', loopsCount: 1 },
-				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
-				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
-				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
-				{ name: 'Practicar 123', time: '1h', loops: '1', loopsCount: 2 },
-			],
-			level: 0,
-		},
-	]);
+	const [powers, setPowers] = useState<IPower[]>([]);
 
 	useEffect(() => {
-		const cachedPowers: IPower[] | unknown = cache.get('powers');
+		const cachedPowers: IPower[] | unknown = cache.get('powers') || [
+			{
+				id: '',
+				name: 'My first POW',
+				needs: [],
+				level: 0,
+			},
+		];
 
 		!!cachedPowers && setPowers(cachedPowers as IPower[]);
 		!!cachedPowers && console.log('CACHED DATA RESTORED');
@@ -59,21 +50,22 @@ const usePower = (): PowerResponse => {
 
 		const updatedPowers = await [...powers, basePower];
 
-		savePowers(updatedPowers);
+		savePowers([...updatedPowers]);
 	};
 
 	const updatePower = async (updatedPower: IPower) => {
+		console.log(updatedPower);
 		const updatedPowers = powers;
 		const indexToupdate: number = await powers.findIndex(p => p.name === updatedPower.name);
 		await updatedPowers.splice(indexToupdate, 1, updatedPower);
 
-		savePowers(updatedPowers);
+		savePowers([...updatedPowers]);
 	};
 
 	const removePower = async (powerName: string) => {
 		const updatedPowers = await powers.filter(ps => ps.name !== powerName);
 
-		savePowers(updatedPowers);
+		savePowers([...updatedPowers]);
 	};
 
 	return { powers, addPower, updatePower, removePower, powerNameValidation };

@@ -1,16 +1,13 @@
 .power {
-  flex: 1 2 400px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-content: center;
 
   height: stretch;
   width: stretch;
-  min-width: 400px;
-  max-width: 100%;
 
-  background: var(--background_second);
   border-radius: 12px;
   user-select: none;
+
   cursor: pointer;
   
   &_name {

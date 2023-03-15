@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useDebounceEffect = <T>(method: () => any, deps: T, delay?: number): any => {
+const useDebounceEffect = <T>(method: () => void, deps: T, delay?: number): void => {
 	useEffect(() => {
 		const handler = setTimeout(() => method(), delay || 2000);
 

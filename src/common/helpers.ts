@@ -1,4 +1,4 @@
-import { PowerLevels } from './constants';
+import { NeedStatus, PowerLevels } from './constants';
 
 export const handlePowerLevels = (exp: number): number => {
 	if (exp < 9) {
@@ -34,3 +34,31 @@ export const handleLevelLabel = (exp: number): string => {
 			return '';
 	}
 };
+
+export const handleNeedStatus = (exp: number): number => {
+	if (exp < 9) {
+		return exp + 2;
+	}
+	return 0;
+};
+
+export const handleNeedLabelStatus = (exp: number): string => {
+	switch (exp) {
+		case 0:
+			return NeedStatus.interested;
+		case 2:
+			return NeedStatus.starting;
+		case 4:
+			return NeedStatus.known;
+		case 6:
+			return NeedStatus.halfway;
+		case 8:
+			return NeedStatus.dominated;
+		case 10:
+			return NeedStatus.expert;
+
+		default:
+			return '';
+	}
+};
+

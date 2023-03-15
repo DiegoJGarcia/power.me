@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import './Need.scss';
 
 import Card from 'components/core/Card';
@@ -7,25 +7,23 @@ import OneText from 'components/core/OneText';
 import { INeed } from 'domain/models/need';
 import { CardStatus } from 'common/constants';
 import useComplete from 'hooks/core/useComplete';
+import { handleNeedLabelStatus } from 'common/helpers';
 
 type NeedProps = {
 	data: INeed;
 	saveNeed?: (item: INeed) => void;
 	removeNeed?: (item: INeed) => void;
-	index?: number;
 	id?: number | string;
 	adding?: boolean;
-	showOrder?: boolean;
-	labelStatus?: string;
 };
 
-const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data, labelStatus }) => {
+const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 	const [need, setNeed] = useState<INeed>(data);
 	const [itemStatus, setNeedStatus] = useState<string>('');
 
 	const completed = useComplete(need, ['name']);
 
-	const handleChange = (name: string, value: string) => {
+	const handleChange = (value: string | number, name: string) => {
 		setNeed(need => ({ ...need, [name]: value }));
 		setNeedStatus('editing');
 	};
@@ -48,18 +46,26 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data, labelStat
 			onSave={!adding ? save : () => saveNeed && saveNeed(need)}
 			onRemove={() => removeNeed && removeNeed(need)}
 		>
-			<StatusIcon name={data?.name} experience={1} noLabel onClick={() => console.log('clicked')}>
+			<StatusIcon
+				name={need.name}
+				experience={need.loopsCount}
+				noLabel
+				onClick={newStatus => handleChange(newStatus, 'loopsCount')}
+			/>
+			<div className="need_body">
 				<OneText
 					firstFocus
 					className="normal"
 					name="name"
 					placeholder="Título"
-					value={'asd'}
-					onChange={handleChange}
+					value={need.name}
+					onChange={value => handleChange(value, 'name')}
 					max={22}
-					align="left"
+					align="center"
 				/>
-			</StatusIcon>
+				<span className="need_line" />
+				<div className="refs">{handleNeedLabelStatus(need.loopsCount)}</div>
+			</div>
 			{/* <div className="need_body">
 				<div className="ref">{labelStatus || 'noob'}</div>
 			</div> */}

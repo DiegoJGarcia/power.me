@@ -1,26 +1,32 @@
 .need {
 	display: flex;
-	align-items: flex-start;
+	flex-direction: column;
+	flex: 2 2 400px;
 	
 	gap: 20px;
 
   color: var(--text_color);
-	
-	padding: 40px 20px 20px 20px ;
-	border-radius: 25px;
-
-	&:hover {
-		border: var(--border);
-
-	}
+	height: fit-content;
+  touch-action: none;
+  
+  padding: 54px 24px 42px 24px;
+  border-radius: var(--radius) var(--radius) var(--radius) 70px;
 
 	&_body {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
-		gap: 10px;
+		align-items: center;
+		justify-content: center;
 
-		// height: 74px;
-		width: stretch;
+		height: 74px;
+		width: 100%;
+	}
+
+	&_line {
+		height: 3px;
+		width: 200px;
+		box-shadow: 0 14px 12px #a1acaca5;
+		border-radius: 50%;
+		background: #d4d6d640;
 	}
 }

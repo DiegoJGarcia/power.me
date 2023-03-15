@@ -4,13 +4,13 @@
   position: relative;
 
   transition: var(--transition);
-  background: var(--background_third);
+  background: var(--background_second);
 
   &_close {
     display: none;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: -5px;
+    right: -5px;
     
     border-radius: 50%;
     width: auto;
@@ -25,7 +25,6 @@
   
   &:hover {
     border: var(--border);
-    box-shadow: var(--shadow-up);
 
     .card_close {
       display: flex;

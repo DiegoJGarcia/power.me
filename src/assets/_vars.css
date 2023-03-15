@@ -2,10 +2,11 @@
   box-sizing: border-box;
   /* COLORS */
 
-  --first: #3482E7;
-  --second: #e7b134;
-  --third: #f65164;
-  --default: #212329;
+  --first: #4E7CFF;
+  --second: #F65164;
+  --third: #7033FF;
+  --fourth: #e7b134;
+  --default: #202442;
   
   --ok: #74cb52;
   --warning: #cec655;
@@ -16,30 +17,38 @@
   
   --hover: #f4f4f442;
   
-  --one: #212329;
-  --two: #313237;
-  --three: #1A1B1F;
-  
-  --background_first: #212329;
-  --background_second: #313237;
-  --background_third: #1A1B1F;
+  --background_first: #202442;
+  --background_second: #25294A;
+  --background_third: #2D325A;
   
   /* COMMONS */
   
   --shadow: 7px 4px 10px #747474bb;
   --shadow-up: 4px 12px 20px #1111112e;
   --inside-shadow: 0px 0px 70px inset #1d1b1bbb;
-  --border: 1px solid #d1cece;
+  --border: 1px solid var(--default);
   --radius: 24px;
   --padding: 40px;
   --gap: 5px;
   --transition: .4s;
 
+  --status_interested: #b8b8b8;
+  --status_interested_shadow: #d3d3d3c2;
+  --status_starting: #4ea9ff;
+  --status_starting_shadow: #4e9bffc2;
+  --status_known: #4e54ff;
+  --status_known_shadow: #514effc2;
+  --status_halfway: #fff34e;
+  --status_halfway_shadow: #ffe44ec2;
+  --status_dominated: #33ff99;
+  --status_dominated_shadow: #33ff77b8;
+  --status_expert: #2e2e2e;
+  --status_expert_shadow: #313131ad;
 }
 
 .light {
 
-  --default: #d3d5dc;
+  --default: #202442;
   
   --text_color: #131313;
   --second_text_color: #fffefedb;
@@ -47,25 +56,29 @@
   --hover: #e3e5e928;
   --border: 1px solid #676666;
   
-  --background_first: #bcbfc5;
-  --background_second: #b3b6ba;
-  --background_third: #7e8083;
+  --background_first: #F6F8FA;
+  --background_second: #FFFFFF;
+  --background_third: #6e91a8;
   
 }
 
 .dark {
 
-  --default: #212329;
+  --default: #d3d5dc;
   
   --text_color: #f8f8f8;
   --second_text_color: #323030db;
   
   --hover: #3030303c;
   --border: 1px solid #e1e1e1;
-  
-  --background_first: #212329;
-  --background_second: #313237;
-  --background_third: #1A1B1F;
+/*   
+  --background_first: #25294a;
+  --background_second: #2D325A;
+  --background_third: #0a0b13; */
+
+  --background_first: #4b4b4b;
+  --background_second: #5b5b5b;
+  --background_third: #2c2c2c;
 
 }
 

@@ -1,32 +1,7 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import './StatusIcon.scss';
 
-enum Status {
-	ok = 'ok',
-	warning = 'warning',
-	error = 'error',
-}
-
-const handleStatus = (exp: number): number => {
-	if (exp < 9) {
-		return exp + 2;
-	}
-	return 0;
-};
-
-const handleLabelStatus = (exp: number): string => {
-	switch (exp) {
-		case 1:
-			return Status.ok;
-		case 2:
-			return Status.warning;
-		case 3:
-			return Status.error;
-
-		default:
-			return '';
-	}
-};
+import { handleNeedLabelStatus, handleNeedStatus } from 'common/helpers';
 
 type StatusIconProps = {
 	img?: string;
@@ -50,12 +25,12 @@ const StatusIcon: FC<StatusIconProps> = ({
 	const [labelStatus, setLabelStatus] = useState<string>('');
 
 	useEffect(() => {
-		const newStatus = handleLabelStatus(experience);
+		const newStatus = handleNeedLabelStatus(experience);
 		setLabelStatus(newStatus);
 	}, [experience]);
 
 	const clicked = () => {
-		const newExperience: number = handleStatus(experience);
+		const newExperience: number = handleNeedStatus(experience);
 		onClick && onClick(newExperience);
 	};
 
@@ -80,8 +55,8 @@ const StatusIcon: FC<StatusIconProps> = ({
 					{img ? (
 						<img onClick={clicked} className="status_icon_body_img" src={img} alt={name} />
 					) : (
-						<div onClick={clicked} className="status_icon_body_img">
-							{children || name}
+						<div onClick={clicked} className="status_icon_body_img values">
+							{children || (name && name[0])}
 						</div>
 					)}
 				</div>
