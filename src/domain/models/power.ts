@@ -4,6 +4,6 @@ import { INeed } from './need';
 export interface IPower {
 	id?: commonId;
 	name: string;
-	needs?: INeed[];
+	needs: INeed[];
 	level?: number;
 }

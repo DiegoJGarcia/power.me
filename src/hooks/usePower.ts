@@ -3,6 +3,7 @@ import { IPower } from 'domain/models/power';
 import { useEffect, useState } from 'react';
 
 interface PowerResponse {
+	activePower: IPower;
 	powers: IPower[];
 	addPower: (newPower: IPower) => void;
 	updatePower: (newPower: IPower) => void;
@@ -13,13 +14,17 @@ interface PowerResponse {
 const usePower = (): PowerResponse => {
 	const [powers, setPowers] = useState<IPower[]>([]);
 
+	const emptyPower: IPower = {
+		id: '',
+		name: '',
+		needs: [],
+		level: 0,
+	};
+
 	useEffect(() => {
 		const cachedPowers: IPower[] | unknown = cache.get('powers') || [
 			{
-				id: '',
-				name: 'My first POW',
-				needs: [],
-				level: 0,
+				...emptyPower,
 			},
 		];
 
@@ -28,6 +33,8 @@ const usePower = (): PowerResponse => {
 
 		return;
 	}, []);
+
+	const activePower = powers[0];
 
 	const powerNameValidation = (powerName: string): boolean => {
 		const notDuplicated = !powers?.find(d => d.name === powerName);
@@ -68,7 +75,7 @@ const usePower = (): PowerResponse => {
 		savePowers([...updatedPowers]);
 	};
 
-	return { powers, addPower, updatePower, removePower, powerNameValidation };
+	return { activePower, powers, addPower, updatePower, removePower, powerNameValidation };
 };
 
 export default usePower;

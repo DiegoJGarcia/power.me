@@ -2,67 +2,35 @@ import React, { ReactElement, useState } from 'react';
 import './Dash.scss';
 
 import useTheme from 'hooks/core/useTheme';
-import usePower from 'hooks/usePower';
+import useNeed from 'hooks/useNeed';
 
-import Power from 'components/elements/Power';
-import Themer from 'components/core/Themer';
-import { IPower } from 'domain/models/power';
+// import Power from 'components/elements/Power';
+// import { IPower } from 'domain/models/power';
+
+import { INeed } from 'domain/models/need';
+
 // import { Stats } from 'components/elements/Stats';
+import Themer from 'components/core/Themer';
 import Header from 'components/layout/Header';
 import Add from 'components/core/Add';
 import Need from 'components/elements/Need';
-import { INeed } from 'domain/models/need';
 
 const Dash = (): ReactElement => {
 	const [light, switchLight] = useTheme();
 	const [emptyOne, setEmptyOne] = useState<boolean>(false);
 
-	const { powers, addPower, updatePower, removePower } = usePower();
-
-	const activePower = powers[0];
-
-	const emptyPower: IPower = {
-		id: '',
-		name: '',
-		needs: [],
-		level: 0,
-	};
+	const { needs, updateNeed } = useNeed();
 
 	const emptyNeed: INeed = {
-		id: String(activePower?.needs?.length) + '-new-need',
+		id: String(needs.length) + '-new-need',
 		name: '',
 		loopsCount: 0,
 		time: '',
 	};
 
-	// const addNewOne = (newCompletedPower: IPower) => {
-	// 	addPower(newCompletedPower);
-	// 	setEmptyOne(true);
-	// };
-
-	const updateNeed = (need: INeed, index: number, type?: string) => {
-		switch (type) {
-			case 'add':
-				activePower?.needs?.push(need);
-				setEmptyOne(false);
-
-				break;
-
-			case 'update':
-				activePower.needs?.splice(index, 1, need);
-
-				break;
-
-			case 'remove':
-				activePower.needs?.splice(index, 1);
-
-				break;
-
-			default:
-				break;
-		}
-
-		updatePower(activePower);
+	const addOne = (newNeed: INeed) => {
+		updateNeed(newNeed, 'add');
+		setEmptyOne(false);
 	};
 
 	return (
@@ -70,12 +38,12 @@ const Dash = (): ReactElement => {
 			<Header label="Pow label" />
 			<Themer className="dash_theme" onClick={switchLight} light={light} />
 			<div className="dash_list">
-				{activePower?.needs?.map((need: INeed, index: number) => (
+				{needs.map((need: INeed, index: number) => (
 					<Need
-						key={index}
+						key={need.name + index}
 						data={need}
-						saveNeed={need => updateNeed(need, index, 'update')}
-						removeNeed={need => updateNeed(need, index, 'remove')}
+						saveNeed={need => updateNeed(need, 'update', index)}
+						removeNeed={need => updateNeed(need, 'remove', index)}
 					/>
 				))}
 
@@ -86,7 +54,7 @@ const Dash = (): ReactElement => {
 						key={'new-need'}
 						adding
 						data={emptyNeed}
-						saveNeed={need => updateNeed(need, 0, 'add')}
+						saveNeed={need => addOne(need)}
 						removeNeed={() => setEmptyOne(false)}
 					/>
 				)}
