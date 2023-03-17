@@ -1,6 +1,7 @@
 import { cache } from 'common/container';
 import { IPower } from 'domain/models/power';
 import { useEffect, useState } from 'react';
+import useTime from './core/useTime';
 
 interface PowerResponse {
 	activePower: IPower;
@@ -14,11 +15,14 @@ interface PowerResponse {
 const usePower = (): PowerResponse => {
 	const [powers, setPowers] = useState<IPower[]>([]);
 
+	const { today } = useTime();
+
 	const emptyPower: IPower = {
 		id: '',
-		name: '',
+		name: 'The power',
 		needs: [],
 		level: 0,
+		date: today,
 	};
 
 	useEffect(() => {
@@ -61,7 +65,6 @@ const usePower = (): PowerResponse => {
 	};
 
 	const updatePower = async (updatedPower: IPower) => {
-		console.log(updatedPower);
 		const updatedPowers = powers;
 		const indexToupdate: number = await powers.findIndex(p => p.name === updatedPower.name);
 		await updatedPowers.splice(indexToupdate, 1, updatedPower);

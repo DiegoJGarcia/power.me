@@ -14,19 +14,17 @@ import Themer from 'components/core/Themer';
 import Header from 'components/layout/Header';
 import Add from 'components/core/Add';
 import Need from 'components/elements/Need';
+import useTime from 'hooks/core/useTime';
+import usePower from 'hooks/usePower';
 
 const Dash = (): ReactElement => {
 	const [light, switchLight] = useTheme();
 	const [emptyOne, setEmptyOne] = useState<boolean>(false);
 
-	const { needs, updateNeed } = useNeed();
+	const { today } = useTime('01/01/2023', 'now');
 
-	const emptyNeed: INeed = {
-		id: String(needs.length) + '-new-need',
-		name: '',
-		loopsCount: 0,
-		time: '',
-	};
+	const { powers } = usePower();
+	const { needs, updateNeed } = useNeed();
 
 	const addOne = (newNeed: INeed) => {
 		updateNeed(newNeed, 'add');
@@ -35,17 +33,21 @@ const Dash = (): ReactElement => {
 
 	return (
 		<div className={`dash ${light ? 'light' : 'dark'}`}>
-			<Header label="Pow label" />
+			<Header label={powers[0]?.name} />
 			<Themer className="dash_theme" onClick={switchLight} light={light} />
 			<div className="dash_list">
-				{needs.map((need: INeed, index: number) => (
-					<Need
-						key={need.name + index}
-						data={need}
-						saveNeed={need => updateNeed(need, 'update', index)}
-						removeNeed={need => updateNeed(need, 'remove', index)}
-					/>
-				))}
+				{needs.find(n => n.complete) && <div className="dash_title refs">Excelente día!</div>}
+				{needs.map(
+					(need: INeed, index: number) =>
+						!need.complete && (
+							<Need
+								key={need.name + index}
+								data={need}
+								saveNeed={need => updateNeed(need, 'update', index)}
+								removeNeed={need => updateNeed(need, 'remove', index)}
+							/>
+						),
+				)}
 
 				<Add className="dash_list_add" onClick={() => setEmptyOne(true)} />
 
@@ -53,18 +55,34 @@ const Dash = (): ReactElement => {
 					<Need
 						key={'new-need'}
 						adding
-						data={emptyNeed}
 						saveNeed={need => addOne(need)}
 						removeNeed={() => setEmptyOne(false)}
 					/>
 				)}
+
+				<div className="dash_title subtitles">
+					{needs.find(n => n.complete) ? 'Completadas' : 'Comienza tu día!'}
+				</div>
+
+				{needs.map(
+					(need: INeed, index: number) =>
+						need.complete && (
+							<Need
+								key={need.name + index}
+								data={need}
+								saveNeed={need => updateNeed(need, 'update', index)}
+								removeNeed={need => updateNeed(need, 'remove', index)}
+							/>
+						),
+				)}
 			</div>
+
 			{/* [TODO] FOCUS ON REAL TIME STATUS */}
 			{/* <Stats /> */}
-			{/* <div className="dash_action codes">
-				<h2>POWEERME</h2>
-				<p>by DECREIER 2022</p>
-			</div> */}
+			<div className="dash_action codes">
+				<h2>POWEER.ME</h2>
+				<p>by DECREIER since {today}</p>
+			</div>
 		</div>
 	);
 };

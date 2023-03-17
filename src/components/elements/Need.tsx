@@ -1,16 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './Need.scss';
 
 import Card from 'components/core/Card';
-import StatusIcon from 'components/core/StatusIcon';
 import OneText from 'components/core/OneText';
 import { INeed } from 'domain/models/need';
 import { CardStatus } from 'common/constants';
 import useComplete from 'hooks/core/useComplete';
-import { handleNeedLabelStatus } from 'common/helpers';
+import { needDaysLapseLabel } from 'common/helpers';
+import useTime from 'hooks/core/useTime';
+import Label from 'components/core/Label';
+import moment from 'moment';
 
 type NeedProps = {
-	data: INeed;
+	data?: INeed;
 	saveNeed?: (item: INeed) => void;
 	removeNeed?: (item: INeed) => void;
 	id?: number | string;
@@ -18,12 +20,33 @@ type NeedProps = {
 };
 
 const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
-	const [need, setNeed] = useState<INeed>(data);
+	const { today } = useTime();
+
+	const defaultNeed: INeed = {
+		id: 'new-need',
+		name: '',
+		loops: 0,
+		time: 0,
+		date: today,
+		complete: false,
+		lastLoop: today,
+		todayLoop: today,
+	};
+
+	const [need, setNeed] = useState<INeed>(data || defaultNeed);
 	const [itemStatus, setNeedStatus] = useState<string>('');
 
 	const completed = useComplete(need, ['name']);
 
-	const handleChange = (value: string | number, name: string) => {
+	const needStatus = needDaysLapseLabel(need.time - need.loops);
+
+	useEffect(() => {
+		if (today !== need.todayLoop && need.lastLoop !== need.todayLoop && need.complete)
+			handleChange(today, 'lastLoop');
+		return;
+	}, []);
+
+	const handleChange = (value: string | number | boolean, name: string) => {
 		setNeed(need => ({ ...need, [name]: value }));
 		setNeedStatus('editing');
 	};
@@ -37,25 +60,26 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 		setNeedStatus('');
 	};
 
+	const clicking = () => {
+		handleChange(!need.complete ? today : need.lastLoop, 'todayLoop');
+		handleChange(!need.complete, 'complete');
+	};
+
 	return (
 		<Card
 			key={id}
-			className="need"
+			data={need}
+			className={`need${need?.complete ? ' need--complete' : ''}`}
 			id={!adding ? id : 'new-need'}
 			status={!adding ? itemStatus : completed ? CardStatus.editing : CardStatus.new}
-			onSave={!adding ? save : () => saveNeed && saveNeed(need)}
+			onSave={save}
 			onRemove={() => removeNeed && removeNeed(need)}
+			onClick={clicking}
 		>
-			<StatusIcon
-				name={need.name}
-				experience={need.loopsCount}
-				noLabel
-				onClick={newStatus => handleChange(newStatus, 'loopsCount')}
-			/>
 			<div className="need_body">
 				<OneText
 					firstFocus
-					className="normal"
+					className="subtitles"
 					name="name"
 					placeholder="Título"
 					value={need.name}
@@ -63,8 +87,15 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 					max={22}
 					align="center"
 				/>
-				<span className="need_line" />
-				<div className="refs">{handleNeedLabelStatus(need.loopsCount)}</div>
+				<div className="need_status">
+					<span className="need_status_line" />
+					<Label type={needStatus}>{needStatus}</Label>
+					{need.todayLoop}
+				</div>
+				<div className="need_details">
+					<div className="values">{need.time}</div>
+					<div className="values">{need.loops}</div>
+				</div>
 			</div>
 			{/* <div className="need_body">
 				<div className="ref">{labelStatus || 'noob'}</div>

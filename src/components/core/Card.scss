@@ -4,22 +4,21 @@
   position: relative;
 
   transition: var(--transition);
-  background: var(--background_second);
 
   &_close {
     display: none;
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 12px;
+    right: 12px;
     
     border-radius: 50%;
     width: auto;
     height: 27px;
     transition: .2s;
-    
+
     z-index: 4;
-    background: var(--error);
-    
+    background: var(--second);
+
     cursor: pointer;
   }
   
@@ -68,9 +67,11 @@
     pointer-events: none;
     
     &--save {
+      width: 200px;
+      height: 50px;
       margin: 0 50px;
       bottom: -27px;
-      background: var(--ok);
+      background: var(--first);
       padding: 4px 7px;
       border-radius: 4px;
       pointer-events: all;
@@ -89,10 +90,8 @@
   }
   
   &--editing {
-    border-top: 1px solid #4e7dffe0;
-    border-bottom: 1px solid #4e7dffe0;
     backdrop-filter: blur(4px);
-    background: linear-gradient(to bottom right, #4e7dffe3, #4e7dffa6);
+    background: var(--background_third);
     transform: scale(1.01);
     
   }

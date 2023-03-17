@@ -1,13 +1,16 @@
 import moment from 'moment';
 
-type TypeTime = {
-	start?: string | number;
-	end?: string | number;
-	time?: string | number;
-	weeks?: number;
+type TimeResponse = {
+	start: string | number;
+	end: string | number;
+	time: string | number;
+	months: number;
+	weeks: number;
+	days: number;
+	today: string;
 };
 
-const useTime = (startTime?: string, endTime?: string): TypeTime => {
+const useTime = (startTime?: string, endTime?: string): TimeResponse => {
 	const start = moment(startTime).format('MMMM YYYY');
 	const end =
 		endTime === 'now' ? moment().format('MMMM YYYY') : moment(endTime).format('MMMM YYYY');
@@ -15,6 +18,7 @@ const useTime = (startTime?: string, endTime?: string): TypeTime => {
 	const days = Number(moment(end).diff(start, 'd'));
 	const months = Number(moment(end).diff(start, 'M'));
 	const years = Number(Math.floor(months / 12));
+	const today = moment().format('DD MMMM YYYY');
 
 	const xMonths = months - years * 12;
 
@@ -24,15 +28,12 @@ const useTime = (startTime?: string, endTime?: string): TypeTime => {
 					xMonths !== 0 ? ` y ${xMonths} ${xMonths > 1 ? 'meses' : 'mes'}` : ''
 			  }`
 			: months > 0
-			? `${months} ${months > 1 ? 'meses' : 'mes'}${
-					days !== 0 ? ` y ${days} ${days > 1 ? 'días' : 'día'}` : ''
-			  }`
+			? `${months} ${months > 1 ? 'meses' : 'mes'}`
 			: `${days} ${days !== 1 ? 'días' : 'día'}`;
 
-	console.log('MONTHJS', start);
 	const weeks = Math.floor(months / 7);
 
-	return { start, end, time, weeks };
+	return { start, end, time, months, weeks, days, today };
 };
 
 export default useTime;

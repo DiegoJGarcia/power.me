@@ -6,4 +6,5 @@ export interface IPower {
 	name: string;
 	needs: INeed[];
 	level?: number;
+	date: string;
 }

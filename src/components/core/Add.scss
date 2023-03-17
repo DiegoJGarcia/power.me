@@ -14,6 +14,8 @@
   opacity: 25%;
   border: none;
   
+  z-index: 9;
+
   &:disabled {
     background: grey;
     &:hover {

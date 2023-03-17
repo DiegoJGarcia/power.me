@@ -1,13 +1,13 @@
 import { NeedStatus, PowerLevels } from './constants';
 
-export const handlePowerLevels = (exp: number): number => {
+export const powerLevel = (exp: number): number => {
 	if (exp < 9) {
 		return exp + 1;
 	}
 	return 0;
 };
 
-export const handleLevelLabel = (exp: number): string => {
+export const powerLevelLabel = (exp: number): string => {
 	switch (exp) {
 		case 1:
 			return PowerLevels.noob;
@@ -35,30 +35,25 @@ export const handleLevelLabel = (exp: number): string => {
 	}
 };
 
-export const handleNeedStatus = (exp: number): number => {
-	if (exp < 9) {
-		return exp + 2;
+export const needDaysLapse = (days: number): number => {
+	if (days < 4) {
+		return days + 1;
 	}
 	return 0;
 };
 
-export const handleNeedLabelStatus = (exp: number): string => {
-	switch (exp) {
+export const needDaysLapseLabel = (days: number): string => {
+	switch (days) {
 		case 0:
-			return NeedStatus.interested;
+		case 1:
 		case 2:
-			return NeedStatus.starting;
+			return NeedStatus.good;
+		case 3:
 		case 4:
-			return NeedStatus.known;
-		case 6:
-			return NeedStatus.halfway;
-		case 8:
-			return NeedStatus.dominated;
-		case 10:
-			return NeedStatus.expert;
+		case 5:
+			return NeedStatus.alert;
 
 		default:
-			return '';
+			return NeedStatus.bad;
 	}
 };
-

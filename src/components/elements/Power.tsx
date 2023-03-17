@@ -5,7 +5,7 @@ import { INeed } from 'domain/models/need';
 import { IPower } from 'domain/models/power';
 import Need from './Need';
 import usePower from 'hooks/usePower';
-import { handleLevelLabel } from 'common/helpers';
+import { powerLevelLabel } from 'common/helpers';
 import useComplete from 'hooks/core/useComplete';
 import { CardStatus } from 'common/constants';
 import OneText from 'components/core/OneText';
@@ -25,7 +25,7 @@ const Power: FC<PowerProps> = ({ data }) => {
 	const [levelLabel, setLevelLabel] = useState<string>();
 
 	useEffect(() => {
-		const newStatus = handleLevelLabel(power.level || 0);
+		const newStatus = powerLevelLabel(power.level || 0);
 		setLevelLabel(newStatus);
 	}, [power.level]);
 

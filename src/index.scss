@@ -3,6 +3,7 @@
 body {
   margin: 0;
   padding: 0;
+  transition: 0s;
   
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,10 +11,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
+  overflow: hidden;
 }
 
 * {
   box-sizing: border-box;
+  transition: var(--transition);
 }
 
 code {
@@ -47,18 +50,19 @@ code {
   font-weight: 900;
   font-size: 44px;
   line-height: 47px;
-  color: var(--second_color);
-
+  color: var(--text_color);
+  
+  
 }
 
 .subtitles {
   text-decoration: none;
   font-style: normal;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 32px;
   line-height: 30px;
-  color: var(--second_color);
-
+  color: var(--text_color);
+  
 }
 
 .labels {
@@ -66,8 +70,8 @@ code {
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  color: var(--second_text_color);
-
+  color: var(--text_color);
+  
 }
 
 .refs {
@@ -75,7 +79,7 @@ code {
   font-style: italic;
   font-weight: 600;
   font-size: 16px;
-  color: var(--second_color);
+  color: var(--text_color);
 
 }
 

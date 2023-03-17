@@ -11,8 +11,6 @@ type CardProps = {
 	status?: string;
 	className?: string;
 	onClick?: () => void;
-	onClickStart?: () => void;
-	onClickEnd?: () => void;
 	onSave?: () => void;
 	onRemove?: () => void;
 	noRemove?: boolean;
@@ -25,14 +23,18 @@ const Card: FC<CardProps> = ({
 	children,
 	className,
 	onClick,
-	onClickStart,
-	onClickEnd,
 	onSave,
 	onRemove,
 	noRemove = false,
 	data,
 }) => {
-	useDebounceEffect(() => data && enter(), data);
+	useDebounceEffect(
+		() => {
+			status === CardStatus.editing && enter();
+		},
+		[data],
+		1000,
+	);
 
 	const enter = () => {
 		return onSave && onSave();
@@ -46,14 +48,6 @@ const Card: FC<CardProps> = ({
 			onClick={e => {
 				e.stopPropagation();
 				onClick && onClick();
-			}}
-			onMouseDown={e => {
-				e.stopPropagation();
-				onClickStart && onClickStart();
-			}}
-			onMouseUp={e => {
-				e.stopPropagation();
-				onClickEnd && onClickEnd();
 			}}
 			key={id}
 			onKeyDown={e => e.key === 'Enter' && enter()}
@@ -70,19 +64,13 @@ const Card: FC<CardProps> = ({
 				/>
 			)}
 			{children}
-			{status === CardStatus.editing ? (
-				<div className="card_label card_label--save" onClick={enter}>
-					Guardar
-				</div>
-			) : (
-				<div className="card_label">
-					{status === CardStatus.new
-						? 'Faltan datos'
-						: status === CardStatus.error
-						? 'Este nombre ya existe'
-						: ''}
-				</div>
-			)}
+			<div className="card_label">
+				{status === CardStatus.new
+					? 'Faltan datos, no se guardará'
+					: status === CardStatus.error
+					? 'Este nombre ya existe'
+					: ''}
+			</div>
 		</div>
 	);
 };

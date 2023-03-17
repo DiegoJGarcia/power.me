@@ -1,0 +1,27 @@
+.label {
+  display: grid;
+  place-content: center;
+
+  width: fit-content;
+  height: auto;
+
+  background: var(--background_second);
+
+  border-radius: 12px;
+
+  width: 120px;
+  padding: 6px 18px;
+  margin: 8px;
+
+  border: var(--border);
+
+  &--good {
+		background: var(--third);
+	}
+	&--alert {
+		background: var(--fourth);
+	}
+	&--bad {
+		background: var(--second);
+	}
+}

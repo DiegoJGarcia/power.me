@@ -36,22 +36,10 @@ export enum PowerLevels {
 }
 
 export enum NeedStatus {
-	interested = 'interesado',
-	starting = 'iniciando',
-	known = 'probado',
-	halfway = 'perfeccionando',
-	dominated = 'dominado',
-	expert = 'experto',
+	good = 'good',
+	alert = 'alert',
+	bad = 'bad',
 }
-
-// [TODO] add layouts support
-// export enum Layouts {
-// 	simple = 'simple',
-// 	historic = 'historic',
-// 	milestone = 'milestone',
-// 	multimedia = 'multimedia',
-// 	labeled = 'labeled',
-// }
 
 export enum paths {
 	dash = '/',

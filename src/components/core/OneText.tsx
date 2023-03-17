@@ -78,6 +78,7 @@ const OneText: FC<OneTextProps> = ({
 					readOnly={readOnly}
 					value={value && value !== '' ? value : text}
 					maxLength={max}
+					onClick={e => e.stopPropagation()}
 				/>
 				{(showFix || (value && suffix)) && <div className="ref text--extra">{suffix}</div>}
 			</div>

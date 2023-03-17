@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import './StatusIcon.scss';
 
-import { handleNeedLabelStatus, handleNeedStatus } from 'common/helpers';
+import { needDaysLapseLabel, needDaysLapse } from 'common/helpers';
 
 type StatusIconProps = {
 	img?: string;
@@ -25,12 +25,12 @@ const StatusIcon: FC<StatusIconProps> = ({
 	const [labelStatus, setLabelStatus] = useState<string>('');
 
 	useEffect(() => {
-		const newStatus = handleNeedLabelStatus(experience);
+		const newStatus = needDaysLapseLabel(experience);
 		setLabelStatus(newStatus);
 	}, [experience]);
 
 	const clicked = () => {
-		const newExperience: number = handleNeedStatus(experience);
+		const newExperience: number = needDaysLapse(experience);
 		onClick && onClick(newExperience);
 	};
 

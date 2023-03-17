@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { cache } from 'common/container';
 import { INeed } from 'domain/models/need';
 import { IPower } from 'domain/models/power';
 import usePower from './usePower';
@@ -19,7 +18,6 @@ const useNeed = (): NeedResponse => {
 
 	useEffect(() => {
 		const defaultNeeds = updatedPower?.needs;
-		console.log(defaultNeeds);
 		defaultNeeds && setNeeds(defaultNeeds);
 		return;
 	}, [updatedPower]);
@@ -36,7 +34,6 @@ const useNeed = (): NeedResponse => {
 				break;
 
 			case 'remove':
-				console.log('INDEX TO REMOVE', index);
 				(!!index || index === 0) && updatedPower.needs?.splice(index, 1);
 
 				break;
