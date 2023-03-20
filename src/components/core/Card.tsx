@@ -1,7 +1,8 @@
-import React, { FC, ReactElement, useRef } from 'react';
+import React, { FC, ReactElement } from 'react';
 import './Card.scss';
 
 import remove from 'assets/error.svg';
+import ok from 'assets/ok.svg';
 import useDebounceEffect from 'hooks/core/useDebounce';
 import { CardStatus } from 'common/constants';
 
@@ -9,17 +10,20 @@ type CardProps = {
 	id?: string | number;
 	children?: ReactElement | ReactElement[] | string | number;
 	status?: string;
+	borderStatus?: string;
 	className?: string;
 	onClick?: () => void;
 	onSave?: () => void;
 	onRemove?: () => void;
 	noRemove?: boolean;
 	data?: unknown;
+	autoSave?: boolean;
 };
 
 const Card: FC<CardProps> = ({
 	id,
 	status = '',
+	borderStatus = 'good',
 	children,
 	className,
 	onClick,
@@ -27,13 +31,14 @@ const Card: FC<CardProps> = ({
 	onRemove,
 	noRemove = false,
 	data,
+	autoSave = false,
 }) => {
 	useDebounceEffect(
 		() => {
-			status === CardStatus.editing && enter();
+			autoSave && status === CardStatus.editing && enter();
 		},
 		[data],
-		1000,
+		2000,
 	);
 
 	const enter = () => {
@@ -43,7 +48,10 @@ const Card: FC<CardProps> = ({
 	return (
 		<div
 			className={
-				'card' + `${className ? ` ${className}` : ''}` + `${status ? ` card--${status}` : ''}`
+				'card' +
+				`${className ? ` ${className}` : ''}` +
+				`${status ? ` card--${status}` : ''}` +
+				`${borderStatus ? ` card--${borderStatus}` : ''}`
 			}
 			onClick={e => {
 				e.stopPropagation();
@@ -52,21 +60,34 @@ const Card: FC<CardProps> = ({
 			key={id}
 			onKeyDown={e => e.key === 'Enter' && enter()}
 		>
-			{!noRemove && (
-				<img
-					className="card_close"
-					onClick={e => {
-						e.stopPropagation();
-						onRemove && onRemove();
-					}}
-					src={remove}
-					alt="delete_button"
-				/>
+			{!noRemove && status !== CardStatus.new && (
+				<div className="card_actions">
+					{!autoSave && (
+						<img
+							className="card_actions_save"
+							onClick={e => {
+								enter();
+								e.stopPropagation();
+							}}
+							src={ok}
+							alt="save_button"
+						/>
+					)}
+					<img
+						className="card_actions_close"
+						onClick={e => {
+							onRemove && onRemove();
+							e.stopPropagation();
+						}}
+						src={remove}
+						alt="delete_button"
+					/>
+				</div>
 			)}
 			{children}
 			<div className="card_label">
 				{status === CardStatus.new
-					? 'Faltan datos, no se guardará'
+					? 'Faltan datos'
 					: status === CardStatus.error
 					? 'Este nombre ya existe'
 					: ''}

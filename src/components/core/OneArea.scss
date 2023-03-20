@@ -1,0 +1,115 @@
+@import "assets/vars";
+
+.area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+
+  gap: 7px;
+
+  z-index: 4;
+  transition: 1s;
+
+  &--extra {
+    margin-top: 4px;
+    min-width: fit-content;
+  }
+
+  &_label {
+    width: stretch;
+    padding: 2px 7px;
+
+    &--center {
+      text-align: center;
+    }
+
+    &--left {
+      text-align: left;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
+
+  &_input {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 9px;
+    width: stretch;
+    height: fit-content;
+
+    transition: 1s;
+
+  }
+
+  ::placeholder {
+    font-size: medium;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--second_text_color);
+
+    margin: 0;
+  }
+  
+  &_area {
+    background-color: transparent;
+
+    border: none;
+
+    overflow: hidden;
+    cursor: text;
+
+    padding: 4px;
+    height: fit-content;
+    word-wrap: normal;
+
+    z-index: 4;
+    resize: none;
+
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--text_color);
+
+    &:read-only {
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: #d5d5d54d;
+    }
+
+    &:focus {
+      background: linear-gradient(to bottom right, #396d86b9, #396d86);
+      transition: .4s;
+      transform: scale(1.02);
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--left {
+      text-align: left;
+    }
+
+    &--right {
+      text-align: right;
+    }
+
+    &--non-editable {
+      background-color: transparent;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .area_area {
+    padding: 4px;
+    font-size: 16px;
+    line-height: 12px;
+  }
+}

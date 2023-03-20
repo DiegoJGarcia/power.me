@@ -2,14 +2,14 @@ import React, { FC, useEffect, useState } from 'react';
 import './Need.scss';
 
 import Card from 'components/core/Card';
-import OneText from 'components/core/OneText';
 import { INeed } from 'domain/models/need';
 import { CardStatus } from 'common/constants';
 import useComplete from 'hooks/core/useComplete';
 import { needDaysLapseLabel } from 'common/helpers';
 import useTime from 'hooks/core/useTime';
+import OneArea from 'components/core/OneArea';
+import { OneCheck } from 'components/core/OneCheck';
 import Label from 'components/core/Label';
-import moment from 'moment';
 
 type NeedProps = {
 	data?: INeed;
@@ -34,17 +34,17 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 	};
 
 	const [need, setNeed] = useState<INeed>(data || defaultNeed);
-	const [itemStatus, setNeedStatus] = useState<string>('');
+	const [needStatus, setNeedStatus] = useState<string>('');
 
 	const completed = useComplete(need, ['name']);
 
-	const needStatus = needDaysLapseLabel(need.time - need.loops);
+	const needLoopsStatus = needDaysLapseLabel(need.time - need.loops);
 
 	useEffect(() => {
 		if (today !== need.todayLoop && need.lastLoop !== need.todayLoop && need.complete)
 			handleChange(today, 'lastLoop');
 		return;
-	}, []);
+	}, [need]);
 
 	const handleChange = (value: string | number | boolean, name: string) => {
 		setNeed(need => ({ ...need, [name]: value }));
@@ -67,39 +67,44 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 
 	return (
 		<Card
+			autoSave
 			key={id}
 			data={need}
 			className={`need${need?.complete ? ' need--complete' : ''}`}
 			id={!adding ? id : 'new-need'}
-			status={!adding ? itemStatus : completed ? CardStatus.editing : CardStatus.new}
+			status={!adding ? needStatus : completed ? CardStatus.editing : CardStatus.new}
+			borderStatus={needLoopsStatus}
 			onSave={save}
 			onRemove={() => removeNeed && removeNeed(need)}
-			onClick={clicking}
+			// onClick={clicking} deprecated
 		>
-			<div className="need_body">
-				<OneText
-					firstFocus
-					className="subtitles"
-					name="name"
-					placeholder="Título"
-					value={need.name}
-					onChange={value => handleChange(value, 'name')}
-					max={22}
-					align="center"
-				/>
-				<div className="need_status">
-					<span className="need_status_line" />
-					<Label type={needStatus}>{needStatus}</Label>
-					{need.todayLoop}
-				</div>
-				<div className="need_details">
-					<div className="values">{need.time}</div>
-					<div className="values">{need.loops}</div>
-				</div>
+			<Label className="need_label" type={needLoopsStatus}>
+				{needLoopsStatus}
+			</Label>
+			<OneArea
+				firstFocus
+				className="need_name labels"
+				name="name"
+				placeholder="Título"
+				value={need.name}
+				onChange={value => handleChange(value, 'name')}
+				max={34}
+				align="center"
+			/>
+			<div className="need_status">
+				Last {need.todayLoop}
+				<span className="need_status_line" />
 			</div>
-			{/* <div className="need_body">
-				<div className="ref">{labelStatus || 'noob'}</div>
-			</div> */}
+			<div className="need_details">
+				<div className="values">{need.time}</div>
+				<div className="values">{need.loops}</div>
+			</div>
+			<OneCheck
+				className="need_check"
+				name="complete"
+				defaultChecked={need.complete}
+				onChange={clicking}
+			/>
 		</Card>
 	);
 };

@@ -1,0 +1,33 @@
+.check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 12px;
+
+  border-radius: 6px;
+  border: 2px solid whitesmoke;
+  cursor: pointer;
+  
+  width: 24px;
+  height: 24px;
+  
+  transition: .4s;
+  
+  background: whitesmoke;
+  
+  &:hover {
+    border: var(--border);
+    transform: scale(1.05);
+  }
+  
+  &:checked {
+    background: var(--first);
+    &:after {
+      content: "\2713";
+      color: whitesmoke;
+    }
+  }
+
+  appearance: none;
+}

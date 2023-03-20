@@ -33,10 +33,10 @@ const Dash = (): ReactElement => {
 
 	return (
 		<div className={`dash ${light ? 'light' : 'dark'}`}>
-			<Header label={powers[0]?.name} />
-			<Themer className="dash_theme" onClick={switchLight} light={light} />
+			<Header label={powers[0]?.name}>
+				<Themer onClick={switchLight} light={light} />
+			</Header>
 			<div className="dash_list">
-				{needs.find(n => n.complete) && <div className="dash_title refs">Excelente día!</div>}
 				{needs.map(
 					(need: INeed, index: number) =>
 						!need.complete && (
@@ -77,8 +77,6 @@ const Dash = (): ReactElement => {
 				)}
 			</div>
 
-			{/* [TODO] FOCUS ON REAL TIME STATUS */}
-			{/* <Stats /> */}
 			<div className="dash_action codes">
 				<h2>POWEER.ME</h2>
 				<p>by DECREIER since {today}</p>

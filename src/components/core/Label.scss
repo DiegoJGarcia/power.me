@@ -3,14 +3,14 @@
   place-content: center;
 
   width: fit-content;
-  height: auto;
+  height: 28px;
 
   background: var(--background_second);
 
-  border-radius: 12px;
+  border-radius: 8px;
 
-  width: 120px;
-  padding: 6px 18px;
+  min-width: 80px;
+  padding: 4px 14px;
   margin: 8px;
 
   border: var(--border);

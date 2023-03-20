@@ -11,12 +11,6 @@
 
   background: var(--background_first);
 
-  &_theme {
-    position: fixed;
-    top: 18px;
-    right: 18px;
-  }
-  
   &_list {
     display: flex;
     justify-content: flex-start;
@@ -41,32 +35,7 @@
   }
     
   &_title {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    
     width: 100%;
-    padding: 20px 40px;
-    color: var(--text_color);
-  }
-  
-  &_complete {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    background: #3f67c3;
-
-    overflow: hidden;
-
-    width: stretch;
-    height: 100%;
-
-    padding: 45px 45px 120px 45px;
-
-    overflow: hidden auto;
-
   }
 
   &_action {
@@ -75,6 +44,23 @@
     align-items: center;
     gap: 10px;
     
-    font-size: smaller; 
+    font-size: smaller;
+  }
+}
+
+@media (max-width: 650px) {
+  .dash {
+    &_list {
+      justify-content: space-evenly;
+      align-items: flex-start;
+      padding: 24px 24px 72px 24px;
+      gap: 24px 12px;
+    }
+
+    &_title {
+      font-size: small;
+      padding: 12px;
+    }
+    
   }
 }

@@ -5,33 +5,50 @@
 
   transition: var(--transition);
 
-  &_close {
+  &_actions {
     display: none;
+    justify-content: center;
+    gap: 54px;
     position: absolute;
-    top: 12px;
-    right: 12px;
-    
-    border-radius: 50%;
-    width: auto;
-    height: 27px;
-    transition: .2s;
+    bottom: -18px;
+    width: 40%;
 
-    z-index: 4;
-    background: var(--second);
-
-    cursor: pointer;
-  }
+    &_save {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      transition: .2s;
   
+      padding: 5px;
+      z-index: 4;
+      background: var(--third);
+  
+      cursor: pointer;
+    }
+  
+    &_close {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      transition: .2s;
+  
+      z-index: 4;
+      background: var(--second);
+  
+      cursor: pointer;
+    }
+  }
+
   &:hover {
     border: var(--border);
 
-    .card_close {
+    .card_actions {
       display: flex;
       border: 1px solid transparent;
       
       transition: .5s;
       
-      &:hover {
+      &_save:hover, &_close:hover {
         transform: scale(1.1);
         border: var(--border);
       }
@@ -86,20 +103,43 @@
   
   &--new {
     background-color: var(--first);
-    
   }
   
   &--editing {
     backdrop-filter: blur(4px);
     background: var(--background_third);
     transform: scale(1.01);
-    
   }
   
   &--error {
     background: var(--third);
     transform: scale(1.01);
-    
   }
 
+  &--good {
+    border: 2px solid var(--third);
+  }
+  &--alert {
+    border: 2px solid var(--fourth);
+  }
+  &--bad {
+    border: 2px solid var(--second);
+  }
+}
+
+@media (max-width: 650px) {
+  .card {
+    &_label {
+      font-size: medium;
+    }
+    &_actions {
+      gap: 22px;
+      width: 60%;
+  
+      &_save, &_close {
+        width: 27px;
+        height: 27px;
+      }
+    }
+  }
 }
