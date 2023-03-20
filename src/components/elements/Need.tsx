@@ -10,6 +10,7 @@ import useTime from 'hooks/core/useTime';
 import OneArea from 'components/core/OneArea';
 import { OneCheck } from 'components/core/OneCheck';
 import Label from 'components/core/Label';
+import useDebounceEffect from 'hooks/core/useDebounce';
 
 type NeedProps = {
 	data?: INeed;
@@ -41,14 +42,36 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 	const needLoopsStatus = needDaysLapseLabel(need.time - need.loops);
 
 	useEffect(() => {
-		if (today !== need.todayLoop && need.lastLoop !== need.todayLoop && need.complete)
+		if (today !== need.todayLoop && need.lastLoop !== need.todayLoop && need.complete) {
 			handleChange(today, 'lastLoop');
+		}
 		return;
 	}, [need]);
+
+	useDebounceEffect(
+		() => {
+			needStatus === CardStatus.editing && save();
+		},
+		[need.name],
+		3000,
+	);
+
+	useDebounceEffect(
+		() => {
+			needStatus === CardStatus.editing && save();
+		},
+		[need.complete, need.lastLoop],
+		500,
+	);
 
 	const handleChange = (value: string | number | boolean, name: string) => {
 		setNeed(need => ({ ...need, [name]: value }));
 		setNeedStatus('editing');
+	};
+
+	const handleCheck = () => {
+		handleChange(!need.complete ? today : need.lastLoop, 'todayLoop');
+		handleChange(!need.complete, 'complete');
 	};
 
 	const save = async () => {
@@ -60,23 +83,14 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 		setNeedStatus('');
 	};
 
-	const clicking = () => {
-		handleChange(!need.complete ? today : need.lastLoop, 'todayLoop');
-		handleChange(!need.complete, 'complete');
-	};
-
 	return (
 		<Card
-			autoSave
 			key={id}
-			data={need}
 			className={`need${need?.complete ? ' need--complete' : ''}`}
 			id={!adding ? id : 'new-need'}
 			status={!adding ? needStatus : completed ? CardStatus.editing : CardStatus.new}
 			borderStatus={needLoopsStatus}
-			onSave={save}
 			onRemove={() => removeNeed && removeNeed(need)}
-			// onClick={clicking} deprecated
 		>
 			<Label className="need_label" type={needLoopsStatus}>
 				{needLoopsStatus}
@@ -103,7 +117,7 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 				className="need_check"
 				name="complete"
 				defaultChecked={need.complete}
-				onChange={clicking}
+				onChange={handleCheck}
 			/>
 		</Card>
 	);

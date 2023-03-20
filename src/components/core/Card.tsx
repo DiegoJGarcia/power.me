@@ -2,8 +2,6 @@ import React, { FC, ReactElement } from 'react';
 import './Card.scss';
 
 import remove from 'assets/error.svg';
-import ok from 'assets/ok.svg';
-import useDebounceEffect from 'hooks/core/useDebounce';
 import { CardStatus } from 'common/constants';
 
 type CardProps = {
@@ -13,11 +11,8 @@ type CardProps = {
 	borderStatus?: string;
 	className?: string;
 	onClick?: () => void;
-	onSave?: () => void;
 	onRemove?: () => void;
 	noRemove?: boolean;
-	data?: unknown;
-	autoSave?: boolean;
 };
 
 const Card: FC<CardProps> = ({
@@ -27,24 +22,9 @@ const Card: FC<CardProps> = ({
 	children,
 	className,
 	onClick,
-	onSave,
 	onRemove,
 	noRemove = false,
-	data,
-	autoSave = false,
 }) => {
-	useDebounceEffect(
-		() => {
-			autoSave && status === CardStatus.editing && enter();
-		},
-		[data],
-		2000,
-	);
-
-	const enter = () => {
-		return onSave && onSave();
-	};
-
 	return (
 		<div
 			className={
@@ -58,21 +38,9 @@ const Card: FC<CardProps> = ({
 				onClick && onClick();
 			}}
 			key={id}
-			onKeyDown={e => e.key === 'Enter' && enter()}
 		>
 			{!noRemove && status !== CardStatus.new && (
 				<div className="card_actions">
-					{!autoSave && (
-						<img
-							className="card_actions_save"
-							onClick={e => {
-								enter();
-								e.stopPropagation();
-							}}
-							src={ok}
-							alt="save_button"
-						/>
-					)}
 					<img
 						className="card_actions_close"
 						onClick={e => {
