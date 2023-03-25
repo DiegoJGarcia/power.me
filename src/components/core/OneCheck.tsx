@@ -3,11 +3,12 @@ import './OneCheck.scss';
 
 type OneCheckProps = {
 	id?: string;
-	name?: string;
+	name: string;
 	defaultChecked?: boolean;
 	className?: string;
 	disabled?: boolean;
-	onChange?: (value: boolean) => void;
+	onChange?: (checked: boolean, name: string) => void;
+	label?: string;
 };
 
 export const OneCheck: FC<OneCheckProps> = ({
@@ -17,23 +18,28 @@ export const OneCheck: FC<OneCheckProps> = ({
 	className,
 	disabled,
 	onChange,
+	label,
 }) => {
 	const [checked, setChecked] = useState<boolean>(defaultChecked);
 
-	const changeing = (value: boolean) => {
-		onChange && onChange(value);
-		setChecked(value);
+	const changeing = (e: Record<string, any>) => {
+		const newValue = e.target.checked;
+		onChange && onChange(newValue, name);
+		setChecked(newValue);
 	};
 
 	return (
-		<input
-			id={id}
-			className={'check' + `${className ? ` ${className}` : ''}`}
-			name={name}
-			checked={checked}
-			type="checkbox"
-			onChange={e => changeing(e.target.checked)}
-			disabled={disabled}
-		/>
+		<div className={'check' + `${className ? ` ${className}` : ''}`}>
+			<input
+				id={id}
+				className="check_input"
+				name={name}
+				checked={checked}
+				type="checkbox"
+				onChange={changeing}
+				disabled={disabled}
+			/>
+			{label && <div className="check_label refs">{label}</div>}
+		</div>
 	);
 };

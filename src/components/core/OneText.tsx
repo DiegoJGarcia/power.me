@@ -20,7 +20,6 @@ type OneTextProps = {
 	showFix?: boolean;
 	inputmode?: 'text' | 'search' | 'none' | 'tel' | 'url' | 'email' | undefined;
 	maxWidth?: number;
-	firstFocus?: boolean;
 };
 
 const OneText: FC<OneTextProps> = ({
@@ -61,7 +60,6 @@ const OneText: FC<OneTextProps> = ({
 			<div className="text_input">
 				{(showFix || (value && prefix)) && <div className="ref text--extra">{prefix}</div>}
 				<input
-					autoFocus
 					inputMode={inputmode}
 					ref={textRef}
 					name={name}

@@ -57,21 +57,18 @@
   
   &_area {
     background-color: transparent;
-
     border: none;
-
     overflow: hidden;
     cursor: text;
 
     padding: 4px;
     height: fit-content;
-    word-wrap: normal;
+    word-wrap: break-word;
 
     z-index: 4;
     resize: none;
 
     font-weight: 800;
-    font-size: 24px;
     color: var(--text_color);
 
     &:read-only {

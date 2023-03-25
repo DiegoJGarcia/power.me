@@ -1,12 +1,10 @@
-.dash {
+.home {
   width: 100vw;
   height: 100vh;
-  
-  max-height: 100vh;
-  
+
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: stretch;
 
   background: var(--background_first);
@@ -17,44 +15,53 @@
     align-items: center;
     gap: 40px 60px;
     flex-wrap: wrap;
-    
     overflow: hidden;
     
+    transition: 1s;
     width: stretch;
-    height: 100%;
-    
-    padding: 45px 45px 120px 45px;
+    padding: 12px;
     
     overflow: hidden auto;
     
-    &_add {
-      position: fixed;
-      left: calc(50% - 25px);
-      bottom: 64px;
-    } 
-  }
-    
-  &_title {
-    width: 100%;
   }
 
-  &_action {
+  &_adding {
+    display: grid;
+    place-content: center;
+
+    position: absolute;
+    background: #1a1919d4;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+  }
+
+  &_actions {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    
-    font-size: smaller;
+    padding: 12px;
+    background: var(--background_third);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+    z-index: 5;
+
+    &_add {
+      left: calc(50% - 25px);
+      bottom: 24px;
+    }
   }
 }
 
 @media (max-width: 650px) {
-  .dash {
+  .home {
     &_list {
       justify-content: space-evenly;
       align-items: flex-start;
-      padding: 24px 24px 72px 24px;
-      gap: 24px 12px;
+      gap: 12px;
+      padding-bottom: 120px;
     }
 
     &_title {

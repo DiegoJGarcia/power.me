@@ -9,4 +9,5 @@ export interface INeed {
 	todayLoop: string;
 	complete: boolean;
 	date: string;
+	reps: string[];
 }

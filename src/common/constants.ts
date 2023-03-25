@@ -14,7 +14,7 @@ export const Months: any = {
 	december: 'Diciembre',
 };
 
-export const MonthsList: string[] = Object.keys(Months);
+export const Weeks = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 export enum CardStatus {
 	new = 'new',
@@ -42,8 +42,8 @@ export enum NeedStatus {
 }
 
 export enum paths {
-	dash = '/',
-	power = '/:power',
+	home = '/',
+	edit = '/edit',
 }
 
 export const regex = {

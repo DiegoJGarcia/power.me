@@ -54,7 +54,7 @@ const OneArea: FC<OneAreaProps> = ({
 	return (
 		<div className="area" onClick={onClick} onBlur={onBlur} style={{ maxWidth: maxWidth + 'px' }}>
 			{label && (
-				<label className={'area_label label' + `${align ? ` area_label--${align}` : ''}`}>
+				<label className={'area_label labels' + `${align ? ` area_label--${align}` : ''}`}>
 					{label}
 				</label>
 			)}
@@ -68,8 +68,8 @@ const OneArea: FC<OneAreaProps> = ({
 					className={
 						'area_area' +
 						`${readOnly ? ' area_area--non-editable' : ''}` +
-						`${className ? ` ${className}` : ''}` +
-						`${align ? ` area_area--${align}` : ''}`
+						`${align ? ` area_area--${align}` : ''}` +
+						`${className ? ` ${className}` : ''}`
 					}
 					onKeyDown={e => e.key === 'Enter' && textRef.current.blur()}
 					placeholder={placeholder || name}

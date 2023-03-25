@@ -1,10 +1,10 @@
-.need {
+.hit {
 	touch-action: none;
   transition: 4s;
 	border: var(--border);
 	border-radius: var(--radius);
-	width: stretch;
-	height: 100%;
+	min-height: 80px;
+	min-width: 100%;
 
 	background: var(--background_second);
 
@@ -14,9 +14,6 @@
 		justify-content: flex-start;
 		gap: 12px;
 		padding: 12px;
-		
-		// background: var(--background_second);
-		border-radius: var(--radius) var(--radius) 0 0;
 
 		&_name {
 			width: 100%;
@@ -58,15 +55,5 @@
 
 		border-radius: 0 0 var(--radius) var(--radius);
 		background: #00a2ff;
-	}
-
-	&_actions {
-		display: flex;
-		justify-content: space-evenly;
-
-		&_save, &_remove {
-			width: stretch;
-			height: 24px;
-		}
 	}
 }

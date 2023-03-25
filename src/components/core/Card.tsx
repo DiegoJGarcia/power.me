@@ -8,7 +8,6 @@ type CardProps = {
 	id?: string | number;
 	children?: ReactElement | ReactElement[] | string | number;
 	status?: string;
-	borderStatus?: string;
 	className?: string;
 	onClick?: () => void;
 	onRemove?: () => void;
@@ -18,7 +17,6 @@ type CardProps = {
 const Card: FC<CardProps> = ({
 	id,
 	status = '',
-	borderStatus = 'good',
 	children,
 	className,
 	onClick,
@@ -28,10 +26,7 @@ const Card: FC<CardProps> = ({
 	return (
 		<div
 			className={
-				'card' +
-				`${className ? ` ${className}` : ''}` +
-				`${status ? ` card--${status}` : ''}` +
-				`${borderStatus ? ` card--${borderStatus}` : ''}`
+				'card' + `${className ? ` ${className}` : ''}` + `${status ? ` card--${status}` : ''}`
 			}
 			onClick={e => {
 				e.stopPropagation();
@@ -40,17 +35,15 @@ const Card: FC<CardProps> = ({
 			key={id}
 		>
 			{!noRemove && status !== CardStatus.new && (
-				<div className="card_actions">
-					<img
-						className="card_actions_close"
-						onClick={e => {
-							onRemove && onRemove();
-							e.stopPropagation();
-						}}
-						src={remove}
-						alt="delete_button"
-					/>
-				</div>
+				<img
+					className="card_close"
+					onClick={e => {
+						onRemove && onRemove();
+						e.stopPropagation();
+					}}
+					src={remove}
+					alt="delete_button"
+				/>
 			)}
 			{children}
 			<div className="card_label">

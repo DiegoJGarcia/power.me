@@ -1,6 +1,6 @@
 import { commonId } from './common';
 
-export interface IGift {
+export interface IHit {
 	id?: commonId;
 	name: string;
 	count: number;

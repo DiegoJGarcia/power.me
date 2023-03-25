@@ -3,14 +3,14 @@ import './Need.scss';
 
 import Card from 'components/core/Card';
 import { INeed } from 'domain/models/need';
-import { CardStatus } from 'common/constants';
+import { CardStatus, Weeks } from 'common/constants';
 import useComplete from 'hooks/core/useComplete';
 import { needDaysLapseLabel } from 'common/helpers';
 import useTime from 'hooks/core/useTime';
-import OneArea from 'components/core/OneArea';
 import { OneCheck } from 'components/core/OneCheck';
-import Label from 'components/core/Label';
 import useDebounceEffect from 'hooks/core/useDebounce';
+import OneText from 'components/core/OneText';
+import Button from 'components/core/Button';
 
 type NeedProps = {
 	data?: INeed;
@@ -32,6 +32,7 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 		complete: false,
 		lastLoop: today,
 		todayLoop: today,
+		reps: [],
 	};
 
 	const [need, setNeed] = useState<INeed>(data || defaultNeed);
@@ -48,30 +49,36 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 		return;
 	}, [need]);
 
-	useDebounceEffect(
-		() => {
-			needStatus === CardStatus.editing && save();
-		},
-		[need.name],
-		3000,
-	);
+	// useDebounceEffect(
+	// 	() => {
+	// 		needStatus === CardStatus.editing && save();
+	// 	},
+	// 	[need],
+	// 	3000,
+	// );
 
-	useDebounceEffect(
-		() => {
-			needStatus === CardStatus.editing && save();
-		},
-		[need.complete, need.lastLoop],
-		500,
-	);
+	// useDebounceEffect(
+	// 	() => {
+	// 		needStatus === CardStatus.editing && save();
+	// 	},
+	// 	[need.complete, need.lastLoop],
+	// 	500,
+	// );
 
-	const handleChange = (value: string | number | boolean, name: string) => {
+	const handleChange = (value: string | number | boolean | string[], name: string) => {
+		console.log(name, value);
 		setNeed(need => ({ ...need, [name]: value }));
 		setNeedStatus('editing');
 	};
 
-	const handleCheck = () => {
-		handleChange(!need.complete ? today : need.lastLoop, 'todayLoop');
-		handleChange(!need.complete, 'complete');
+	const handleCheckReps = (checked: boolean, newDay: string) => {
+		let newWeeks = need?.reps;
+		if (newWeeks?.includes(newDay)) {
+			newWeeks = need?.reps.filter(day => day !== newDay);
+		} else {
+			newWeeks.push(newDay);
+		}
+		handleChange(newWeeks, 'reps');
 	};
 
 	const save = async () => {
@@ -89,36 +96,36 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 			className={`need${need?.complete ? ' need--complete' : ''}`}
 			id={!adding ? id : 'new-need'}
 			status={!adding ? needStatus : completed ? CardStatus.editing : CardStatus.new}
-			borderStatus={needLoopsStatus}
 			onRemove={() => removeNeed && removeNeed(need)}
 		>
-			<Label className="need_label" type={needLoopsStatus}>
-				{needLoopsStatus}
-			</Label>
-			<OneArea
-				firstFocus
-				className="need_name labels"
-				name="name"
-				placeholder="Título"
-				value={need.name}
-				onChange={value => handleChange(value, 'name')}
-				max={34}
-				align="center"
-			/>
-			<div className="need_status">
-				Last {need.todayLoop}
-				<span className="need_status_line" />
+			<div className="need_body">
+				<OneText
+					className="need_body_name labels"
+					name="name"
+					placeholder="Título"
+					value={need.name}
+					onChange={value => handleChange(value, 'name')}
+					max={30}
+				/>
+				<div className="need_body_details">Last loop - Next loop</div>
+				<div className="need_body_reps">
+					{Weeks.map((day: string) => (
+						<OneCheck
+							key={day}
+							name={day}
+							label={day}
+							defaultChecked={need?.reps?.includes(day)}
+							onChange={handleCheckReps}
+							className="need_body_reps_check"
+						/>
+					))}
+				</div>
+				<div className="need_actions">
+					<Button type="primary" className="need_actions_save" onClick={save} disabled={!completed}>
+						Guardar
+					</Button>
+				</div>
 			</div>
-			<div className="need_details">
-				<div className="values">{need.time}</div>
-				<div className="values">{need.loops}</div>
-			</div>
-			<OneCheck
-				className="need_check"
-				name="complete"
-				defaultChecked={need.complete}
-				onChange={handleCheck}
-			/>
 		</Card>
 	);
 };

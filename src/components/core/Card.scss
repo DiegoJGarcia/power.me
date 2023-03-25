@@ -5,50 +5,36 @@
 
   transition: var(--transition);
 
-  &_actions {
+  &_close {
     display: none;
     justify-content: center;
     gap: 54px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    transition: .2s;
+    
     position: absolute;
-    bottom: -18px;
-    width: 40%;
+    right: -16px;
+    top: -16px;
 
-    &_save {
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      transition: .2s;
-  
-      padding: 5px;
-      z-index: 4;
-      background: var(--third);
-  
-      cursor: pointer;
-    }
-  
-    &_close {
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      transition: .2s;
-  
-      z-index: 4;
-      background: var(--second);
-  
-      cursor: pointer;
-    }
+    z-index: 12;
+    background: var(--second);
+
+    cursor: pointer;
   }
 
   &:hover {
     border: var(--border);
 
-    .card_actions {
+    .card_close {
+      position: absolute;
       display: flex;
       border: 1px solid transparent;
       
       transition: .5s;
       
-      &_save:hover, &_close:hover {
+      &:hover {
         transform: scale(1.1);
         border: var(--border);
       }
@@ -82,23 +68,7 @@
     font-size: 19px;
     user-select: none;
     pointer-events: none;
-    
-    &--save {
-      width: 200px;
-      height: 50px;
-      margin: 0 50px;
-      bottom: -27px;
-      background: var(--first);
-      padding: 4px 7px;
-      border-radius: 4px;
-      pointer-events: all;
-      cursor: pointer;
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--text_color);
-      text-shadow: 2px 2px 7px black;
-      
-    }
+
   }
   
   &--new {
@@ -114,16 +84,6 @@
   &--error {
     background: var(--third);
     transform: scale(1.01);
-  }
-
-  &--good {
-    border: 2px solid var(--third);
-  }
-  &--alert {
-    border: 2px solid var(--fourth);
-  }
-  &--bad {
-    border: 2px solid var(--second);
   }
 }
 
