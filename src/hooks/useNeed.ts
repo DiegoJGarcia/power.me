@@ -9,12 +9,12 @@ interface NeedResponse {
 	saveNeeds: (needs: INeed[]) => void;
 }
 
-const useNeed = (): NeedResponse => {
+const useNeed = (id?: string): NeedResponse => {
 	const [needs, setNeeds] = useState<INeed[]>([]);
 
-	const { activePower, updatePower } = usePower();
+	const { powers, updatePower } = usePower();
 
-	const updatedPower: IPower = activePower;
+	const updatedPower: IPower = powers.find(pow => pow.id === id) || powers[0];
 
 	useEffect(() => {
 		const defaultNeeds = updatedPower?.needs;
@@ -47,7 +47,7 @@ const useNeed = (): NeedResponse => {
 
 	const saveNeeds = async (needs: INeed[]) => {
 		setNeeds(needs);
-		await updatePower({ ...activePower, needs: [...needs] });
+		await updatePower({ ...updatedPower, needs: [...needs] });
 	};
 
 	return { needs, updateNeed, saveNeeds };

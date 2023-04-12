@@ -1,14 +1,20 @@
 .power {
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 
   height: stretch;
   width: stretch;
 
+  padding: 20px;
   border-radius: 12px;
   user-select: none;
 
+  background: var(--background_third);
   cursor: pointer;
+  user-select: none;
   
   &_name {
     display: flex;
@@ -32,18 +38,11 @@
   }
 
   &_add {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
   }
 
-  &--adding {
-    padding: 20px;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 12px;
-    user-select: none;
-    cursor: pointer;
-
-  }
 }

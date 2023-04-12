@@ -2,7 +2,6 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import { paths } from 'common/constants';
 
-import Edit from 'pages/Edit';
 import Home from 'pages/Home';
 
 export interface IRoute {
@@ -24,11 +23,4 @@ export const routes: IRoute[] = [
 		label: 'Home',
 		element: <Home />,
 	},
-	// {
-	// 	name: 'edit',
-	// 	path: paths.edit,
-	// 	key: 1,
-	// 	label: 'Edit',
-	// 	element: <Edit />,
-	// },
 ];

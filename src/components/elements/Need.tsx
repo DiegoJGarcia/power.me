@@ -49,22 +49,6 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 		return;
 	}, [need]);
 
-	// useDebounceEffect(
-	// 	() => {
-	// 		needStatus === CardStatus.editing && save();
-	// 	},
-	// 	[need],
-	// 	3000,
-	// );
-
-	// useDebounceEffect(
-	// 	() => {
-	// 		needStatus === CardStatus.editing && save();
-	// 	},
-	// 	[need.complete, need.lastLoop],
-	// 	500,
-	// );
-
 	const handleChange = (value: string | number | boolean | string[], name: string) => {
 		console.log(name, value);
 		setNeed(need => ({ ...need, [name]: value }));
@@ -107,7 +91,6 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 					onChange={value => handleChange(value, 'name')}
 					max={30}
 				/>
-				<div className="need_body_details">Last loop - Next loop</div>
 				<div className="need_body_reps">
 					{Weeks.map((day: string) => (
 						<OneCheck
