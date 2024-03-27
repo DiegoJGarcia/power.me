@@ -12,13 +12,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  
-    // border-radius: 6px;
-    // border: 2px solid whitesmoke;
+
     cursor: pointer;
     
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
     
     transition: .4s;
     
@@ -29,15 +27,6 @@
       transform: scale(1.05);
     }
     
-    // &:checked {
-    //   background: var(--first);
-    //   &:after {
-    //     content: "\2713";
-    //     color: whitesmoke;
-    //   }
-    // }
-
-    // appearance: none;
   }
 
 }

@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import './Card.scss';
 
 import remove from 'assets/error.svg';
+import save from 'assets/ok.svg';
 import { CardStatus } from 'common/constants';
 
 type CardProps = {
@@ -12,6 +13,8 @@ type CardProps = {
 	onClick?: () => void;
 	onRemove?: () => void;
 	noRemove?: boolean;
+	onSave?: () => void;
+	noSave?: boolean;
 };
 
 const Card: FC<CardProps> = ({
@@ -22,6 +25,8 @@ const Card: FC<CardProps> = ({
 	onClick,
 	onRemove,
 	noRemove = false,
+	onSave,
+	noSave = false,
 }) => {
 	return (
 		<div
@@ -34,15 +39,26 @@ const Card: FC<CardProps> = ({
 			}}
 			key={id}
 		>
-			{!noRemove && status !== CardStatus.new && (
+			{!noRemove && (
 				<img
-					className="card_close"
+					className="card_remove"
 					onClick={e => {
 						onRemove && onRemove();
 						e.stopPropagation();
 					}}
 					src={remove}
 					alt="delete_button"
+				/>
+			)}
+			{!noSave && status === CardStatus.editing && (
+				<img
+					className="card_save"
+					onClick={e => {
+						onSave && onSave();
+						e.stopPropagation();
+					}}
+					src={save}
+					alt="save_button"
 				/>
 			)}
 			{children}

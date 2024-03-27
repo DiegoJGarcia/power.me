@@ -1,0 +1,62 @@
+.brainstorm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+
+  height: stretch;
+  width: auto;
+  max-width: 1000px;
+
+  padding: 20px;
+  border-radius: 12px;
+  user-select: none;
+
+  background: var(--background_third);
+  cursor: pointer;
+  user-select: none;
+
+  &_name {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 20px 0 0 0;
+  }
+  
+  &_ideas {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+
+    &_item {
+      display: flex;
+
+      &--remove {
+        display: none;
+      }
+      &:hover {
+        &--remove {
+          display: block;
+        }
+        
+      }
+    }
+  }
+
+  &_add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+  }
+
+}

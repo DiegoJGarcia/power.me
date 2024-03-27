@@ -14,7 +14,7 @@ export const Months: any = {
 	december: 'Diciembre',
 };
 
-export const Weeks = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
+export const Days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 export enum CardStatus {
 	new = 'new',
@@ -44,6 +44,7 @@ export enum NeedStatus {
 export enum paths {
 	home = '/',
 	edit = '/edit',
+	brainstormings = '/brainstormings',
 }
 
 export const regex = {

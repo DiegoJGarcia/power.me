@@ -3,14 +3,12 @@ import './Need.scss';
 
 import Card from 'components/core/Card';
 import { INeed } from 'domain/models/need';
-import { CardStatus, Weeks } from 'common/constants';
+import { CardStatus, Days } from 'common/constants';
 import useComplete from 'hooks/core/useComplete';
 import { needDaysLapseLabel } from 'common/helpers';
 import useTime from 'hooks/core/useTime';
 import { OneCheck } from 'components/core/OneCheck';
-import useDebounceEffect from 'hooks/core/useDebounce';
 import OneText from 'components/core/OneText';
-import Button from 'components/core/Button';
 
 type NeedProps = {
 	data?: INeed;
@@ -21,7 +19,7 @@ type NeedProps = {
 };
 
 const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
-	const { today } = useTime();
+	const { today, dayAb } = useTime();
 
 	const defaultNeed: INeed = {
 		id: 'new-need',
@@ -40,7 +38,7 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 
 	const completed = useComplete(need, ['name']);
 
-	const needLoopsStatus = needDaysLapseLabel(need.time - need.loops);
+	// const needLoopsStatus = needDaysLapseLabel(need.time - need.loops);
 
 	useEffect(() => {
 		if (today !== need.todayLoop && need.lastLoop !== need.todayLoop && need.complete) {
@@ -50,7 +48,6 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 	}, [need]);
 
 	const handleChange = (value: string | number | boolean | string[], name: string) => {
-		console.log(name, value);
 		setNeed(need => ({ ...need, [name]: value }));
 		setNeedStatus('editing');
 	};
@@ -81,34 +78,34 @@ const Need: FC<NeedProps> = ({ saveNeed, removeNeed, id, adding, data }) => {
 			id={!adding ? id : 'new-need'}
 			status={!adding ? needStatus : completed ? CardStatus.editing : CardStatus.new}
 			onRemove={() => removeNeed && removeNeed(need)}
+			onSave={save}
 		>
-			<div className="need_body">
+			<div className="need_name">
 				<OneText
-					className="need_body_name labels"
+					className="labels"
 					name="name"
 					placeholder="Título"
 					value={need.name}
 					onChange={value => handleChange(value, 'name')}
 					max={30}
 				/>
-				<div className="need_body_reps">
-					{Weeks.map((day: string) => (
+			</div>
+			<div className="need_reps">
+				{Days.map((day: string) => (
+					<div
+						key={day}
+						className={`need_reps_check${dayAb === day ? ' need_reps_check--current' : ''}`}
+					>
 						<OneCheck
-							key={day}
 							name={day}
 							label={day}
 							defaultChecked={need?.reps?.includes(day)}
 							onChange={handleCheckReps}
-							className="need_body_reps_check"
 						/>
-					))}
-				</div>
-				<div className="need_actions">
-					<Button type="primary" className="need_actions_save" onClick={save} disabled={!completed}>
-						Guardar
-					</Button>
-				</div>
+					</div>
+				))}
 			</div>
+			<div className="need_time labels">5 min</div>
 		</Card>
 	);
 };

@@ -8,6 +8,7 @@ type TimeResponse = {
 	weeks: number;
 	days: number;
 	today: string;
+	dayAb: string;
 };
 
 const useTime = (startTime?: string, endTime?: string): TimeResponse => {
@@ -19,6 +20,7 @@ const useTime = (startTime?: string, endTime?: string): TimeResponse => {
 	const months = Number(moment(end).diff(start, 'M'));
 	const years = Number(Math.floor(months / 12));
 	const today = moment().format('DD MMMM YYYY');
+	const day = moment().format('dddd'); // Obtener el nombre del día de la semana en inglés
 
 	const xMonths = months - years * 12;
 
@@ -33,7 +35,9 @@ const useTime = (startTime?: string, endTime?: string): TimeResponse => {
 
 	const weeks = Math.floor(months / 7);
 
-	return { start, end, time, months, weeks, days, today };
+	const dayAb = day.substring(0, 2).toLowerCase();
+
+	return { start, end, time, months, weeks, days, today, dayAb };
 };
 
 export default useTime;

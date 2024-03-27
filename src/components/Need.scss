@@ -1,0 +1,65 @@
+.need {
+	display: flex;
+
+	border: var(--border);
+	border-radius: var(--radius);
+
+	background: var(--background_second);
+	padding: 0 24px;
+	
+	&_name {
+	}
+	
+	&_reps {
+		display: flex;
+		justify-content: space-evenly;
+		padding: 0 12px;
+		
+		&_check {
+			display: flex;
+			padding: 12px 8px;
+			
+			&--current {
+				background: var(--background_first);
+
+			}
+		}
+	}
+
+	&_time {
+		color: var(--third);
+	}
+
+	&_actions {
+		display: flex;
+		justify-content: space-evenly;
+		
+		&_save, &_remove {
+			width: stretch;
+			height: 24px;
+		}
+	}
+}
+
+// &_status {
+// 	display: flex;
+// 	justify-content: space-between;
+// 	align-items: center;
+// 	padding: 4px 12px 4px 4px;
+	
+// 	width: stretch;
+// 	height: px;
+
+// 	&--good {
+// 		background: var(--third);
+// 	}
+// 	&--alert {
+// 		background: var(--fourth);
+// 	}
+// 	&--bad {
+// 		background: var(--second);
+// 	}
+
+// 	border-radius: 0 0 var(--radius) var(--radius);
+// 	background: #00a2ff;
+// }

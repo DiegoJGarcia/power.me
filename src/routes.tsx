@@ -3,6 +3,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import { paths } from 'common/constants';
 
 import Home from 'pages/Home';
+import Brainstormings from 'pages/Brainstormings';
 
 export interface IRoute {
 	name: string;
@@ -22,5 +23,12 @@ export const routes: IRoute[] = [
 		index: true,
 		label: 'Home',
 		element: <Home />,
+	},
+	{
+		name: 'brainstorms',
+		path: paths.brainstormings,
+		key: 1,
+		label: 'Brainstormings',
+		element: <Brainstormings />,
 	},
 ];

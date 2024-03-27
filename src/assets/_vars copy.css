@@ -1,0 +1,71 @@
+:root {
+  box-sizing: border-box;
+  /* COLORS */
+
+  --first: #3f66d3;
+  --second: #cd3f4f;
+  --third: #2cd765;
+  --fourth: #cda037;
+  --default: #733a8d;
+  
+  --text_color: #131313;
+  --second_text_color: #686868;
+  
+  --hover: #f4f4f442;
+  
+  --background_first: #202442;
+  --background_second: #25294A;
+  --background_third: #2D325A;
+  
+  /* COMMONS */
+  
+  --shadow: 7px 4px 10px #747474bb;
+  --shadow-up: 4px 12px 20px #1111112e;
+  --inside-shadow: 0px 0px 70px inset #1d1b1bbb;
+  --border: 1px solid var(--default);
+  --radius: 4px;
+  --padding: 40px;
+  --gap: 5px;
+  --transition: .7s;
+
+  --status_interested: #b8b8b8;
+  --status_interested_shadow: #d3d3d3c2;
+  --status_starting: #4ea9ff;
+  --status_starting_shadow: #4e9bffc2;
+  --status_known: #4e54ff;
+  --status_known_shadow: #514effc2;
+  --status_halfway: #fff34e;
+  --status_halfway_shadow: #ffe44ec2;
+  --status_dominated: #33ff99;
+  --status_dominated_shadow: #33ff77b8;
+  --status_expert: #2e2e2e;
+  --status_expert_shadow: #313131ad;
+}
+
+.light {
+
+  --text_color: #131313;
+  --second_text_color: #323030db;
+  
+  --hover: #e3e5e928;
+  --border: 1px solid #676666;
+  
+  --background_first: #cfd1d4;
+  --background_second: #eeeff1;
+  --background_third: #4568b9;
+  
+}
+
+.dark {
+
+  --text_color: #f8f8f8;
+  --second_text_color: #a4a0a0db;
+  
+  --hover: #3030303c;
+  --border: 1px solid #e1e1e1;
+
+  --background_first: #4b4b4b;
+  --background_second: #5b5b5b;
+  --background_third: #2c2c2c;
+
+}

@@ -5,35 +5,46 @@
 
   transition: var(--transition);
 
-  &_close {
+  &_remove, &_save {
+    position: absolute;
     display: none;
     justify-content: center;
     gap: 54px;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
     transition: .2s;
-    
-    position: absolute;
-    right: -16px;
-    top: -16px;
 
     z-index: 12;
-    background: var(--second);
 
     cursor: pointer;
+  }
+  
+  &_remove {
+    width: 28px;
+    height: 28px;
+    
+    left: -16px;
+    background: var(--second);
+  }
+  
+  &_save {
+    width: 28px;
+    height: 28px;
+    
+    right: -16px;
+    padding: 4px;
+    background: var(--third);
   }
 
   &:hover {
     border: var(--border);
 
-    .card_close {
-      position: absolute;
+    .card_remove, .card_save {
       display: flex;
       border: 1px solid transparent;
       
       transition: .5s;
-      
+
+
       &:hover {
         transform: scale(1.1);
         border: var(--border);
@@ -57,12 +68,13 @@
     justify-content: center;
     align-items: center;
 
-    width: stretch;
+    // width: 100%;
     opacity: 0%;
     transform: scale(0.0);
     
     position: absolute;
     bottom: -29px;
+    left: 42%;
 
     color: var(--text_color);
     font-size: 19px;

@@ -1,15 +1,9 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 
 import { IRoute, routes } from './routes';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { paths } from 'common/constants';
+import { Routes, Route } from 'react-router-dom';
 
 const App = (): ReactElement => {
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		navigate(paths.home);
-	}, []);
 	return (
 		<Routes>
 			{routes.map((route: IRoute) => (

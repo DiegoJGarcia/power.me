@@ -1,90 +1,71 @@
 :root {
   box-sizing: border-box;
   /* COLORS */
-
-  --first: #3f66d3;
-  --second: #cd3f4f;
-  --third: #2cd765;
-  --fourth: #cda037;
-  --default: #733a8d;
   
-  --text_color: #131313;
-  --second_text_color: #686868;
+  --first: #1877F2; /* Azul de Meta (Facebook) */
+  --second: #DB4437; /* Rojo de Google */
+  --third: #34A853; /* Verde de Google */
+  --fourth: #FFBF00; /* Amarillo de Google */
+  --default: #3C4043; /* Gris oscuro de Google **/
   
-  --hover: #f4f4f442;
+  --text_color: #202124; /* Negro para el texto principal */
+  --second_text_color: #5F6368; /* Gris para el texto secundario */
   
-  --background_first: #202442;
-  --background_second: #25294A;
-  --background_third: #2D325A;
+  --hover: #F5F5F5; /* Gris claro para el efecto hover **/
+  
+  --background_first: #FFFFFF; /* Blanco para el fondo principal */
+  --background_second: #F1F3F4; /* Gris claro para el fondo secundario */
+  --background_third: #EEEEEE; /* Otro tono de gris claro para el fondo terciario **/
   
   /* COMMONS */
   
-  --shadow: 7px 4px 10px #747474bb;
-  --shadow-up: 4px 12px 20px #1111112e;
-  --inside-shadow: 0px 0px 70px inset #1d1b1bbb;
-  --border: 1px solid var(--default);
-  --radius: 4px;
-  --padding: 40px;
-  --gap: 5px;
-  --transition: .7s;
-
-  --status_interested: #b8b8b8;
-  --status_interested_shadow: #d3d3d3c2;
-  --status_starting: #4ea9ff;
-  --status_starting_shadow: #4e9bffc2;
-  --status_known: #4e54ff;
-  --status_known_shadow: #514effc2;
-  --status_halfway: #fff34e;
-  --status_halfway_shadow: #ffe44ec2;
-  --status_dominated: #33ff99;
-  --status_dominated_shadow: #33ff77b8;
-  --status_expert: #2e2e2e;
-  --status_expert_shadow: #313131ad;
+  --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* Sombra genérica */
+  --shadow-up: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Sombra con desplazamiento hacia arriba */
+  --inside-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra interna */
+  --border: 1px solid var(--default); /* Borde con el color predeterminado */
+  --radius: 4px; /* Radio de borde redondeado */
+  --padding: 20px; /* Espaciado interno */
+  --gap: 10px; /* Espaciado entre elementos */
+  --transition: 0.3s; /* Duración de transición **/
+  
+  --status_interested: #B8B8B8; /* Gris para el estado "interested" */
+  --status_interested_shadow: #D3D3D3; /* Sombra para el estado "interested" */
+  --status_starting: #4285F4; /* Azul para el estado "starting" */
+  --status_starting_shadow: #4285F4; /* Sombra para el estado "starting" */
+  --status_known: #4285F4; /* Azul para el estado "known" */
+  --status_known_shadow: #4285F4; /* Sombra para el estado "known" */
+  --status_halfway: #F4B400; /* Amarillo para el estado "halfway" */
+  --status_halfway_shadow: #F4B400; /* Sombra para el estado "halfway" */
+  --status_dominated: #0F9D58; /* Verde para el estado "dominated" */
+  --status_dominated_shadow: #0F9D58; /* Sombra para el estado "dominated" */
+  --status_expert: #212121; /* Negro para el estado "expert" */
+  --status_expert_shadow: #212121; /* Sombra para el estado "expert" **/
 }
-
+  
 .light {
 
-  --text_color: #131313;
-  --second_text_color: #fffefedb;
-  
-  --hover: #e3e5e928;
-  --border: 1px solid #676666;
-  
-  --background_first: #cfd1d4;
-  --background_second: #eeeff1;
-  --background_third: #4568b9;
-  
+--text_color: #202124; /* Negro para el texto principal */
+--second_text_color: #3C4043; /* Gris oscuro para el texto secundario **/
+
+--hover: #E0E0E0; /* Gris claro para el efecto hover */
+--border: 1px solid #E0E0E0; /* Borde con color de borde claro **/
+
+--background_first: #bdbdbd; /* Blanco para el fondo principal */
+--background_second: #898d8f; /* Gris claro para el fondo secundario */
+--background_third: #525356; /* Otro tono de gris claro para el fondo terciario **/
+
 }
 
 .dark {
 
-  --text_color: #f8f8f8;
-  --second_text_color: #323030db;
-  
-  --hover: #3030303c;
-  --border: 1px solid #e1e1e1;
-/*   
-  --background_first: #25294a;
-  --background_second: #2D325A;
-  --background_third: #0a0b13; */
+--text_color: #F8F9FA; /* Blanco para el texto principal */
+--second_text_color: #ADB5BD; /* Gris claro para el texto secundario **/
 
-  --background_first: #4b4b4b;
-  --background_second: #5b5b5b;
-  --background_third: #2c2c2c;
+--hover: #343A40; /* Gris oscuro para el efecto hover */
+--border: 1px solid #343A40; /* Borde con color de borde oscuro **/
+
+--background_first: #212529; /* Negro azabache para el fondo principal */
+--background_second: #343A40; /* Gris oscuro para el fondo secundario */
+--background_third: #1C1F22; /* Gris muy oscuro para el fondo terciario **/
 
 }
-
-/* 
-YOU CAN ADD THE THEME YOU WANT HERE.. I AM WORKING ON THE HOOK TO CHOOSE IT
-*/
-
-.tridi {
-  
-  --transform: scale(1.04) perspective(1700px) rotateX(4deg);;
-  --box_shadow: -2px 17px 22px #0c0c0c7e;
-  
-  --text_shadow: -2px 7px 9px #0c0c0c9a;;
-  --transform_text: scale(1.02);
-
-} 
-

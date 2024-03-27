@@ -1,36 +1,36 @@
 import React, { ReactElement } from 'react';
-import './Home.scss';
+import './Brainstormings.scss';
 
 import { paths } from 'common/constants';
 
 import useTheme from 'hooks/core/useTheme';
+import useBrainstorming from 'hooks/useBrainstorming';
 import { useNavigate } from 'react-router-dom';
 
 import Themer from 'components/core/Themer';
 import Header from 'components/layout/Header';
-import usePower from 'hooks/usePower';
-import Power from 'components/Power';
 import Button from 'components/core/Button';
+import Brainstorming from 'components/Brainstorming';
 
-const Home = (): ReactElement => {
+const Brainstormings = (): ReactElement => {
 	const [light, switchLight] = useTheme();
 	const navigate = useNavigate();
 
-	const { powers } = usePower();
+	const { brainstormings } = useBrainstorming();
 
 	return (
 		<div className={`home ${light ? 'light' : 'dark'}`}>
-			<Header label="PowerMe">
+			<Header label="Brainstormings">
 				<Themer onClick={switchLight} light={light} />
 			</Header>
 			<div className="home_list">
-				{powers.map(pow => (
-					<Power data={pow} key={pow.name} />
+				{brainstormings.map(brain => (
+					<Brainstorming title={brain.goal} key={brain.goal} />
 				))}
 			</div>
-			<Button onClick={() => navigate(paths.brainstormings)}>Go Brainstormings</Button>
+			<Button onClick={() => navigate(paths.home)}>Go Home</Button>
 		</div>
 	);
 };
 
-export default Home;
+export default Brainstormings;
